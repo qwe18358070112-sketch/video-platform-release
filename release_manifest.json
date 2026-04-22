@@ -1,0 +1,212 @@
+[
+  {
+    "path": "video_platform_release/admin_utils.py",
+    "size": 2124,
+    "sha256": "e6b8912d52e518fdafc812fe9f592e9ac6feaac724ebb41b4a5c2d234a3b156e"
+  },
+  {
+    "path": "video_platform_release/app.py",
+    "size": 8041,
+    "sha256": "f3c643f33c1520406c74252f4e9a896c0723f329e5695c86867099eb54731990"
+  },
+  {
+    "path": "video_platform_release/build_release.py",
+    "size": 4198,
+    "sha256": "92069681540ec0d07f5a01011296010c2742504579aef1ad8ab9ee1608ee9c49"
+  },
+  {
+    "path": "video_platform_release/compileall.py",
+    "size": 3224,
+    "sha256": "f7ed0b8b1e697afd861f3e4eb45b18ae9e478e7e8e6520fe96e131eeaabf9419"
+  },
+  {
+    "path": "video_platform_release/calibration.py",
+    "size": 8746,
+    "sha256": "9e4321019228ea19c7b5d4a6552a2e174ddc3f67a7cdccc20230dbcdce73f3b6"
+  },
+  {
+    "path": "video_platform_release/common.py",
+    "size": 29850,
+    "sha256": "0c2a53e501065eba92b831f2ab47eb8e81537f770a1a8c48d9873aebe94564d2"
+  },
+  {
+    "path": "video_platform_release/config.yaml",
+    "size": 7517,
+    "sha256": "89e8a924003aa4e58e9a0e46ba53c2754ac39b97dd3b7000fbf8af1b50c946c6"
+  },
+  {
+    "path": "video_platform_release/config.example.yaml",
+    "size": 7479,
+    "sha256": "7d8d315bcbd844c5e1f18ef750f26ed67ad93573cc55a8bdc2ba1a8796b73ae2"
+  },
+  {
+    "path": "video_platform_release/controller.py",
+    "size": 15828,
+    "sha256": "0a2666f8c2255dc6520698c47f4c95150526018a351aa2d817608cb7c91a1149"
+  },
+  {
+    "path": "video_platform_release/detector.py",
+    "size": 42964,
+    "sha256": "9351221a81002ba48784e3493068923547e3876b52880e2fb0b34e2c84baa0a8"
+  },
+  {
+    "path": "video_platform_release/favorites_reader.py",
+    "size": 6104,
+    "sha256": "1ada17bc3b8ca944b66b811899dd8f0b4b8665a5490371a15795b65c840f8673"
+  },
+  {
+    "path": "video_platform_release/grid_mapper.py",
+    "size": 6127,
+    "sha256": "5c58fef5ebbed4a5dbdf1457663edc8d0763ed7c984ec3e6f15eb35909b7a6d3"
+  },
+  {
+    "path": "video_platform_release/input_guard.py",
+    "size": 5299,
+    "sha256": "9499d7474e238d68df3730ae37b146cb5832b42a885ab103d6304be47673d128"
+  },
+  {
+    "path": "video_platform_release/layout_switcher.py",
+    "size": 23277,
+    "sha256": "c21faaef44c73facde4f6ad7118ed8c18ba96b5f21aa9795143e3a1736b3a6e6"
+  },
+  {
+    "path": "video_platform_release/logger_setup.py",
+    "size": 1204,
+    "sha256": "0b59ff167e9984d3807442e6ed4b95dba4a8b702a639311a44c4a4887e40cc62"
+  },
+  {
+    "path": "video_platform_release/README.md",
+    "size": 10863,
+    "sha256": "755a0f1e6c594c20aed51a14487005785633fa3005abd40de7635792872813fb"
+  },
+  {
+    "path": "video_platform_release/README_DEPLOY.md",
+    "size": 5536,
+    "sha256": "b862543c0138cecbe68c9a029a4b092b7b2649b26d892cbfb5ca02917edc5056"
+  },
+  {
+    "path": "video_platform_release/HOW_TO_USE.md",
+    "size": 10760,
+    "sha256": "5e00a1726606a610809d981903ae357efd60ee25c2e671c713eb81bfcb20042a"
+  },
+  {
+    "path": "video_platform_release/LAYOUT_SWITCH_MANUAL.md",
+    "size": 6707,
+    "sha256": "0dc33571632b2d9b9cc6331a1991a79dfd1ea74cff51b0df3cdfd6f27ad95398"
+  },
+  {
+    "path": "video_platform_release/MIGRATION_GUIDE.md",
+    "size": 3038,
+    "sha256": "5d0fef9bc48709046742a9e696022a5f843c2a9d63a896a08522858a0d589cef"
+  },
+  {
+    "path": "video_platform_release/CALIBRATION_GUIDE.md",
+    "size": 5541,
+    "sha256": "d8900896c6472fc339158ffa2c8dd1a9a27b9f169950130879aa21177008e3c8"
+  },
+  {
+    "path": "video_platform_release/CODEX_LOCAL_ADMIN_PROMPT.txt",
+    "size": 6743,
+    "sha256": "039fc17b3f4d93ee33fb631c3018890606fbbbdcd26d2467381478a7966bd47b"
+  },
+  {
+    "path": "video_platform_release/requirements.txt",
+    "size": 112,
+    "sha256": "544f4ec83f3866f832c7fa4886857f3a17030125feb3a41ff96d0528e90174b6"
+  },
+  {
+    "path": "video_platform_release/runtime_guard.py",
+    "size": 13824,
+    "sha256": "860eb9e9f7101fbd6f5dfa9c33301ca51b4f48b13ff3d9b3dc454113935674bc"
+  },
+  {
+    "path": "video_platform_release/scheduler.py",
+    "size": 111030,
+    "sha256": "1062ee5f4a5939834c74daca646f3a20492862a2fc4e9ae4d9e95f6ef146ec9b"
+  },
+  {
+    "path": "video_platform_release/self_test.py",
+    "size": 97291,
+    "sha256": "149011e7c07a21cac77c520f327eecade797942a7063223aa81e8ba5fba9052b"
+  },
+  {
+    "path": "video_platform_release/smoke_probe.py",
+    "size": 4882,
+    "sha256": "e8aae6f7173d0bc8ce56cbd4fe8ac5ea8967a880772896482d89b4f72add70e4"
+  },
+  {
+    "path": "video_platform_release/status_overlay.py",
+    "size": 9615,
+    "sha256": "9390102fa6d5350f281ab9a433360cdca92e0da6740e7d6435388888a8de5f66"
+  },
+  {
+    "path": "video_platform_release/status_runtime.py",
+    "size": 10864,
+    "sha256": "eaafa704bb61c3e001835e4991ee74d707611dcb621c8df17a80d8ff7857351f"
+  },
+  {
+    "path": "video_platform_release/window_manager.py",
+    "size": 26477,
+    "sha256": "7619a73185ad9ceef32343904d83ffdd65f597a947206a53fc55c003ff982288"
+  },
+  {
+    "path": "video_platform_release/WINDOWED_ACCEPTANCE.md",
+    "size": 1364,
+    "sha256": "f16bc091a14e9767b2d516b7b2f4247d526d08b6d0d546c81c37df36661b88ac"
+  },
+  {
+    "path": "video_platform_release/提示词.txt",
+    "size": 2962,
+    "sha256": "bc1ee8d19e99ccf508f299a0547f830197dc981de5ca145dcb0a41d9e378873b"
+  },
+  {
+    "path": "video_platform_release/提示词_增强版.txt",
+    "size": 4427,
+    "sha256": "2b22d44c63a0a87ccc14f75a4eaa599b234fa8066d2367165a2b26311edaeb75"
+  },
+  {
+    "path": "video_platform_release/install_deps.bat",
+    "size": 1280,
+    "sha256": "a376d11efaa8ba1a3d6a91b13a47d74c9c82613d7d69946047bb18782546e40a"
+  },
+  {
+    "path": "video_platform_release/run_auto.bat",
+    "size": 135,
+    "sha256": "c7f3cdad1a67d11b1db5d519cd828c687f05e380187739f7b8d0607bee4d9c7e"
+  },
+  {
+    "path": "video_platform_release/calibrate_windowed.bat",
+    "size": 138,
+    "sha256": "3532c14e143f9ff2a94c12d7ea58eb1cbc1de57847047b633addd33995e27b1f"
+  },
+  {
+    "path": "video_platform_release/calibrate_fullscreen.bat",
+    "size": 140,
+    "sha256": "579b5df2608102c824f80f5c90caa0857f5a597dfbc210e60d13f89dc57286d3"
+  },
+  {
+    "path": "video_platform_release/inspect_windowed.bat",
+    "size": 155,
+    "sha256": "b0c96f2dbe76677e28be4fc6cf1e66a6e5a159c65ac9c4f7e198e7d974651442"
+  },
+  {
+    "path": "video_platform_release/inspect_fullscreen.bat",
+    "size": 157,
+    "sha256": "f20508383c61610a50ab57b715f6998ee0b61d15712ef72fc9c55a649df70789"
+  },
+  {
+    "path": "video_platform_release/dump_favorites.bat",
+    "size": 134,
+    "sha256": "33ca6d5252209aef0f11686d9c14c347f2f29cf35d2dbdf1850bc2ac6adefbd3"
+  },
+  {
+    "path": "video_platform_release/self_test.bat",
+    "size": 123,
+    "sha256": "9d92573ec5b88f287a5ac74a7f7dc0e3bdf754ee506a269d4646720ef4e5d0ac"
+  },
+  {
+    "path": "video_platform_release/build_release.bat",
+    "size": 168,
+    "sha256": "8a7b0cd6616bbd3d8587e7ed5fc09f666276164e5e1756001284f3dffeaab5c7"
+  }
+]

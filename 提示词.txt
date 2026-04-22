@@ -1,0 +1,63 @@
+先分析我提供给你的项目目录、配置文件、README、日志、测试视频截图，再开始改代码。我会赋予你本电脑管理员权限，并允许你使用终端、本地 Python、本地文件系统和浏览器。目标客户端是视频融合赋能平台，程序路径参考：D:\opsmgr\Infovision Foresight\client\framework\infosightclient.1\bin\ClientFrame。
+
+你现在是一个资深 Windows 桌面自动化工程师和 Python 工程师。你必须把项目做成“能在本机运行、能在其他电脑部署、能继续给 Codex 接力修复”的状态。
+
+【本项目唯一正确的单路动作路径】
+单击选中 -> 双击放大 -> 停留 dwell_seconds 秒 -> 双击返回 -> 停留 post_restore_dwell_seconds 秒 -> 下一路。
+
+你不允许把动作路径写错为：
+- 直接双击放大 -> 下一路
+- 双击返回后立刻切下一路
+- 没有单击选中就直接双击
+
+【本轮优先级】
+1. 先确认并修正文档、提示词、自测、代码里所有动作路径定义，保证完全一致。
+2. 再确认 F11 = 返回宫格并重走当前未完成动作路径，不允许直接跳下一路。
+3. 再确认 F9 在暂停状态下可连续使用，每按一次自动选中下一路，但仍保持暂停。
+4. 再确认 favorites_name、4/6/9/12 宫格、全屏/非全屏统一逻辑可用。
+5. 最后补充发布脚本与运行说明。
+
+【你必须先读的文件】
+- README.md
+- HOW_TO_USE.md
+- README_DEPLOY.md
+- config.yaml
+- scheduler.py
+- common.py
+- grid_mapper.py
+- controller.py
+- self_test.py
+
+【你必须执行的检查】
+1. python -m compileall 项目根目录
+2. python self_test.py
+3. 如果失败，继续修，直到通过
+4. 通过后再进入本机实测
+
+
+【自动识别与手动切布局要求】
+1. 必须核查并保持这两条链路可用：
+   - `window_manager.detect_mode()`：自动识别 `windowed / fullscreen`
+   - `scheduler._try_sync_runtime_layout()` + `layout_switcher.detect_current_layout()`：自动识别当前 `4 / 6 / 9 / 12` 宫格
+2. 如果你修复了自动识别逻辑，必须同步修：
+   - `README.md`
+   - `HOW_TO_USE.md`
+   - `LAYOUT_SWITCH_MANUAL.md`
+   - 当前提示词文件
+3. 手动切宫格只能走两种正确入口：
+   - `python app.py --switch-layout 4|6|9|12|13`
+   - 顶部工具栏里的 `窗口分割`
+4. 不允许把左侧收藏夹树当成布局切换入口。
+5. `--switch-layout` 执行后，必须人工核对中央宫格真的已经变化，不能只信命令返回成功。
+
+【输出要求】
+1. 需求理解
+2. 根因分析
+3. 修改文件清单
+4. 每个文件修改内容
+5. 自测结果
+6. 本机实测结果
+7. 目标机仍需实测的点
+8. 下一轮建议
+
+额外要求：程序必须具备错误界面识别、错误窗口识别、错误点击结果识别、自我修复、自我暂停留证能力。误点击后如果弹出新窗口或进入陌生界面，不能继续点击，必须先自动修复或自动暂停。

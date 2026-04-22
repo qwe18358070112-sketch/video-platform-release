@@ -1,0 +1,112 @@
+{
+  "entries": [
+    {
+      "layout": "4",
+      "mode": "auto",
+      "config": "config.layout4.yaml",
+      "launcher": "run_layout4_fixed.bat",
+      "wslLauncher": "run_layout4_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_4",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "4",
+      "mode": "windowed",
+      "config": "config.layout4.windowed.yaml",
+      "launcher": "run_layout4_windowed_fixed.bat",
+      "wslLauncher": "run_layout4_windowed_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_4_windowed",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "4",
+      "mode": "fullscreen",
+      "config": "config.layout4.fullscreen.yaml",
+      "launcher": "run_layout4_fullscreen_fixed.bat",
+      "wslLauncher": "run_layout4_fullscreen_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_4_fullscreen",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "6",
+      "mode": "auto",
+      "config": "config.layout6.yaml",
+      "launcher": "run_layout6_fixed.bat",
+      "wslLauncher": "run_layout6_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_6",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "6",
+      "mode": "windowed",
+      "config": "config.layout6.windowed.yaml",
+      "launcher": "run_layout6_windowed_fixed.bat",
+      "wslLauncher": "run_layout6_windowed_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_6_windowed",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "6",
+      "mode": "fullscreen",
+      "config": "config.layout6.fullscreen.yaml",
+      "launcher": "run_layout6_fullscreen_fixed.bat",
+      "wslLauncher": "run_layout6_fullscreen_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_6_fullscreen",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "9",
+      "mode": "auto",
+      "config": "config.layout9.yaml",
+      "launcher": "run_layout9_fixed.bat",
+      "wslLauncher": "run_layout9_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_9",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "9",
+      "mode": "windowed",
+      "config": "config.layout9.windowed.yaml",
+      "launcher": "run_layout9_windowed_fixed.bat",
+      "wslLauncher": "run_layout9_windowed_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_9_windowed",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "9",
+      "mode": "fullscreen",
+      "config": "config.layout9.fullscreen.yaml",
+      "launcher": "run_layout9_fullscreen_fixed.bat",
+      "wslLauncher": "run_layout9_fullscreen_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_9_fullscreen",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "12",
+      "mode": "auto",
+      "config": "config.layout12.yaml",
+      "launcher": "run_layout12_fixed.bat",
+      "wslLauncher": "run_layout12_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_12",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "12",
+      "mode": "windowed",
+      "config": "config.layout12.windowed.yaml",
+      "launcher": "run_layout12_windowed_fixed.bat",
+      "wslLauncher": "run_layout12_windowed_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_12_windowed",
+      "lockRuntimeLayoutToRequested": true
+    },
+    {
+      "layout": "12",
+      "mode": "fullscreen",
+      "config": "config.layout12.fullscreen.yaml",
+      "launcher": "run_layout12_fullscreen_fixed.bat",
+      "wslLauncher": "run_layout12_fullscreen_fixed.sh",
+      "instanceLockName": "fixed_layout_runtime_12_fullscreen",
+      "lockRuntimeLayoutToRequested": true
+    }
+  ]
+}

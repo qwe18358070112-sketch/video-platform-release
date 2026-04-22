@@ -1,0 +1,20 @@
+{
+  "driverKind": "web-plugin-stub",
+  "bridgePreset": "webcontrol-local-service",
+  "driverPreset": "plugin-session-driver",
+  "hostType": "webcontrol-local-service",
+  "runtimePrefix": "drv-plugin",
+  "runtimeSupportFiles": [
+    "runtime/health.js",
+    "runtime/wiring.js",
+    "runtime/policy.json"
+  ],
+  "requiredBridgeMethods": [
+    "launchLocalService",
+    "createPluginWindow",
+    "invokePreview",
+    "stopPreview",
+    "disposePluginWindow"
+  ],
+  "moduleType": "module"
+}

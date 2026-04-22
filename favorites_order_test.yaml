@@ -1,0 +1,352 @@
+window:
+  title_keywords:
+  - 视频融合赋能平台
+  - 视频监控
+  process_names:
+  - ClientFrame.exe
+  focus_before_action: true
+  control_backend: real_mouse
+  autohotkey_path: ''
+  match_timeout_seconds: 5
+  fullscreen_coverage_ratio: 0.96
+  client_margin_tolerance_px: 8
+profiles:
+  active_mode: auto
+  windowed:
+    left_ratio: 0.243359
+    top_ratio: 0.101875
+    right_ratio: 0.997266
+    bottom_ratio: 0.99375
+  fullscreen:
+    left_ratio: 0.004687
+    top_ratio: 0.0075
+    right_ratio: 0.99375
+    bottom_ratio: 0.990625
+grid:
+  layout: 4
+  order: favorites_name
+  cell_padding_ratio: 0.08
+  click_point_ratio_x: 0.5
+  click_point_ratio_y: 0.45
+  custom_sequence:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  active_sequence_profile: ''
+  sequence_profiles:
+    left_to_right_standard:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    top_to_bottom_standard:
+    - 0
+    - 3
+    - 6
+    - 9
+    - 1
+    - 4
+    - 7
+    - 10
+    - 2
+    - 5
+    - 8
+    - 11
+  cell_labels:
+    0: 49K+800M舟山西龙门架球机
+    1: 浙江舟山普陀山-南海观音上广场
+    2: 浙江舟山普陀山-大厅柱子北面球机
+    3: 浙江舟山普陀山-码头广场鹰眼细节
+    4: G9211 K042+540 甬向 球机
+    5: 浙江舟山普陀山-南海观音入口处
+    6: 浙江舟山普陀山-普济寺西门
+    7: 海中洲大酒店顶-球机
+    8: 浙江舟山普陀山-普济寺圆通殿平台
+    9: 浙江舟山普陀山-法雨寺天王殿广场
+    10: 蜈蚣峙停车场高空球机
+    11: 浙江舟山普陀山-法雨寺停车场出口
+  layout_template: ''
+  layout_overrides:
+    '4':
+      rows: 2
+      cols: 2
+    '6':
+      rows: 2
+      cols: 3
+    '9':
+      rows: 3
+      cols: 3
+    '12':
+      rows: 4
+      cols: 3
+  layout_templates:
+    twelve_4x3:
+    - row: 0
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.0
+      right_ratio: 0.3333
+      bottom_ratio: 0.25
+    - row: 0
+      col: 1
+      left_ratio: 0.3333
+      top_ratio: 0.0
+      right_ratio: 0.6666
+      bottom_ratio: 0.25
+    - row: 0
+      col: 2
+      left_ratio: 0.6666
+      top_ratio: 0.0
+      right_ratio: 1.0
+      bottom_ratio: 0.25
+    - row: 1
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.25
+      right_ratio: 0.3333
+      bottom_ratio: 0.5
+    - row: 1
+      col: 1
+      left_ratio: 0.3333
+      top_ratio: 0.25
+      right_ratio: 0.6666
+      bottom_ratio: 0.5
+    - row: 1
+      col: 2
+      left_ratio: 0.6666
+      top_ratio: 0.25
+      right_ratio: 1.0
+      bottom_ratio: 0.5
+    - row: 2
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.5
+      right_ratio: 0.3333
+      bottom_ratio: 0.75
+    - row: 2
+      col: 1
+      left_ratio: 0.3333
+      top_ratio: 0.5
+      right_ratio: 0.6666
+      bottom_ratio: 0.75
+    - row: 2
+      col: 2
+      left_ratio: 0.6666
+      top_ratio: 0.5
+      right_ratio: 1.0
+      bottom_ratio: 0.75
+    - row: 3
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.75
+      right_ratio: 0.3333
+      bottom_ratio: 1.0
+    - row: 3
+      col: 1
+      left_ratio: 0.3333
+      top_ratio: 0.75
+      right_ratio: 0.6666
+      bottom_ratio: 1.0
+    - row: 3
+      col: 2
+      left_ratio: 0.6666
+      top_ratio: 0.75
+      right_ratio: 1.0
+      bottom_ratio: 1.0
+    twelve_3x4:
+    - row: 0
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.0
+      right_ratio: 0.25
+      bottom_ratio: 0.3333
+    - row: 0
+      col: 1
+      left_ratio: 0.25
+      top_ratio: 0.0
+      right_ratio: 0.5
+      bottom_ratio: 0.3333
+    - row: 0
+      col: 2
+      left_ratio: 0.5
+      top_ratio: 0.0
+      right_ratio: 0.75
+      bottom_ratio: 0.3333
+    - row: 0
+      col: 3
+      left_ratio: 0.75
+      top_ratio: 0.0
+      right_ratio: 1.0
+      bottom_ratio: 0.3333
+    - row: 1
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.3333
+      right_ratio: 0.25
+      bottom_ratio: 0.6666
+    - row: 1
+      col: 1
+      left_ratio: 0.25
+      top_ratio: 0.3333
+      right_ratio: 0.5
+      bottom_ratio: 0.6666
+    - row: 1
+      col: 2
+      left_ratio: 0.5
+      top_ratio: 0.3333
+      right_ratio: 0.75
+      bottom_ratio: 0.6666
+    - row: 1
+      col: 3
+      left_ratio: 0.75
+      top_ratio: 0.3333
+      right_ratio: 1.0
+      bottom_ratio: 0.6666
+    - row: 2
+      col: 0
+      left_ratio: 0.0
+      top_ratio: 0.6666
+      right_ratio: 0.25
+      bottom_ratio: 1.0
+    - row: 2
+      col: 1
+      left_ratio: 0.25
+      top_ratio: 0.6666
+      right_ratio: 0.5
+      bottom_ratio: 1.0
+    - row: 2
+      col: 2
+      left_ratio: 0.5
+      top_ratio: 0.6666
+      right_ratio: 0.75
+      bottom_ratio: 1.0
+    - row: 2
+      col: 3
+      left_ratio: 0.75
+      top_ratio: 0.6666
+      right_ratio: 1.0
+      bottom_ratio: 1.0
+favorites:
+  enabled: true
+  left_panel_width_ratio: 0.28
+  top_exclusion_ratio: 0.08
+  cache_file: tmp/favorites_cache.json
+  visible_only: true
+  max_entries: 64
+  include_control_types:
+  - TreeItem
+  - ListItem
+  - Text
+  exclude_texts: []
+runtime_guard:
+  enabled: true
+  verify_before_action: true
+  verify_after_action: true
+  verify_during_dwell: true
+  verify_foreground_window: true
+  detect_related_popups: true
+  auto_close_related_popups: true
+  auto_refocus_external_window: true
+  post_action_wait_ms: 120
+  settle_after_recover_ms: 350
+  rect_drift_tolerance_px: 24
+  consecutive_fail_limit: 3
+  screenshot_dir: logs/guard
+  popup_title_keywords:
+  - 提示
+  - 告警
+  - 错误
+  - 异常
+  - 消息
+  - 确认
+  - warning
+  - error
+  - dialog
+  - prompt
+controls:
+  max_queued_next_steps: 0
+timing:
+  focus_delay_ms: 200
+  click_after_select_ms: 180
+  select_settle_ms: 220
+  dwell_seconds: 4
+  post_restore_dwell_seconds: 4
+  between_cells_ms: 300
+  recovery_wait_ms: 500
+  double_click_interval_ms: 180
+hotkeys:
+  mode_cycle: f7
+  start_pause: f8
+  next_cell: f9
+  stop: f10
+  emergency_recover: f11
+  layout_cycle: f12
+  calibration_capture: f6
+  debounce_ms: 250
+  next_cell_debounce_ms: 120
+detection:
+  enabled: true
+  skip_on_detected_issue: true
+  save_failure_screenshots: true
+  save_anomaly_screenshot: true
+  screenshot_dir: logs/screenshots
+  precheck_crop_ratio: 0.92
+  black_screen_confirm_frames: 2
+  preview_failure_confirm_frames: 2
+  black_screen_mean_threshold: 28
+  black_screen_std_threshold: 16
+  black_screen_bright_ratio_threshold: 0.01
+  black_screen_edge_ratio_threshold: 0.015
+  failure_dark_ratio_threshold: 0.72
+  failure_bright_ratio_min: 0.003
+  failure_bright_ratio_max: 0.12
+  failure_edge_ratio_min: 0.01
+  failure_edge_ratio_max: 0.12
+  zoom_confirm_mean_diff_threshold: 18.0
+  zoom_confirm_changed_ratio_threshold: 0.14
+  resume_zoomed_mean_diff_max: 10.0
+  resume_zoomed_changed_ratio_max: 0.08
+  resume_grid_mean_diff_min: 18.0
+  resume_grid_changed_ratio_min: 0.18
+  runtime_flat_entropy_max: 2.0
+  runtime_flat_edge_ratio_max: 0.04
+  runtime_flat_dominant_ratio_min: 0.55
+  path_retry_limit: 1
+  max_fail_streak_before_cooldown: 3
+  issue_cooldown_cycles: 2
+  use_orb_zoom_confirm: true
+input_guard:
+  enabled: true
+  mouse_move_threshold: 90
+  idle_resume_seconds: 5
+  poll_interval_ms: 200
+  suppress_after_programmatic_input_ms: 2500
+  resume_settle_ms: 1800
+status_overlay:
+  enabled: true
+  status_file: tmp/runtime_status.json
+  close_delay_ms: 2600
+  auto_hide_ms: 2200
+  stale_hide_ms: 4800
+  safe_strip_height_px: 74
+logging:
+  level: INFO
+  log_dir: logs
+  keep_console: true

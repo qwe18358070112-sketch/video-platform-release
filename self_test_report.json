@@ -1,0 +1,642 @@
+{
+  "project_root": "/mnt/data/video_platform_release_py/video_platform_release",
+  "passed": 74,
+  "failed": 0,
+  "results": [
+    {
+      "name": "compileall",
+      "ok": true,
+      "detail": {
+        "compiled": true
+      }
+    },
+    {
+      "name": "compileall_scope",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 7
+      }
+    },
+    {
+      "name": "load_configs",
+      "ok": true,
+      "detail": {
+        "config_mode": "auto",
+        "example_mode": "auto",
+        "queue_depth": 0,
+        "dwell_seconds": 4.0,
+        "post_restore_dwell_seconds": 4.0,
+        "skip_on_detected_issue": true
+      }
+    },
+    {
+      "name": "regular_layout_counts",
+      "ok": true,
+      "detail": {
+        "4": 4,
+        "6": 6,
+        "9": 9,
+        "12": 12
+      }
+    },
+    {
+      "name": "runtime_layout_override_bypasses_configured_template",
+      "ok": true,
+      "detail": {
+        "templated_layout_count": 12,
+        "runtime_override_count": 6
+      }
+    },
+    {
+      "name": "custom_sequence",
+      "ok": true,
+      "detail": {
+        "first_six": [
+          0,
+          3,
+          6,
+          9,
+          1,
+          4
+        ]
+      }
+    },
+    {
+      "name": "column_major",
+      "ok": true,
+      "detail": {
+        "first_six": [
+          0,
+          3,
+          6,
+          9,
+          1,
+          4
+        ]
+      }
+    },
+    {
+      "name": "favorites_name_mapping",
+      "ok": true,
+      "detail": {
+        "order": [
+          3,
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "name": "favorites_visible_name_filtering",
+      "ok": true,
+      "detail": {
+        "names": [
+          "大厅柱子口",
+          "法雨寺停车场",
+          "千步沙入口"
+        ]
+      }
+    },
+    {
+      "name": "layout_template_switch",
+      "ok": true,
+      "detail": {
+        "count": 12,
+        "max_row": 2,
+        "max_col": 3
+      }
+    },
+    {
+      "name": "layout_switch_target_mapping",
+      "ok": true,
+      "detail": {
+        "4": {
+          "section": "平均",
+          "label": "4"
+        },
+        "6": {
+          "section": "水平",
+          "label": "6"
+        },
+        "9": {
+          "section": "平均",
+          "label": "9"
+        },
+        "12": {
+          "section": "其他",
+          "label": "12"
+        },
+        "13": {
+          "section": "其他",
+          "label": "13"
+        }
+      }
+    },
+    {
+      "name": "layout_switch_option_grouping",
+      "ok": true,
+      "detail": {
+        "group_count": 5,
+        "keys": [
+          "其他/12",
+          "其他/13",
+          "平均/4",
+          "平均/9",
+          "水平/6"
+        ]
+      }
+    },
+    {
+      "name": "prepare_target_probe_order",
+      "ok": true,
+      "detail": {
+        "probe_pos": 550,
+        "guard_pos": 646
+      }
+    },
+    {
+      "name": "auto_mode_prefers_windowed_ui_markers",
+      "ok": true,
+      "detail": {
+        "attached_surface_pos": 176,
+        "ui_marker_pos": 1976,
+        "fullscreen_toggle_pos": 2301,
+        "geometry_pos": 248,
+        "fast_path_pos": 1553
+      }
+    },
+    {
+      "name": "runtime_action_path_semantics",
+      "ok": true,
+      "detail": {
+        "dwell_seconds": 4.0,
+        "post_restore_dwell_seconds": 4.0
+      }
+    },
+    {
+      "name": "zoom_confirm_failure_restarts_current_path",
+      "ok": true,
+      "detail": {
+        "required_fragments": 4
+      }
+    },
+    {
+      "name": "paused_manual_next_refreshes_grid_probe_after_recover",
+      "ok": true,
+      "detail": {
+        "recover_pos": 1028,
+        "probe_pos": 1726,
+        "click_pos": 2461
+      }
+    },
+    {
+      "name": "start_pause_toggle_has_settle_lock",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 4
+      }
+    },
+    {
+      "name": "next_hotkey_has_independent_fast_debounce",
+      "ok": true,
+      "detail": {
+        "common_fragments": 2,
+        "scheduler_fragments": 2
+      }
+    },
+    {
+      "name": "single_function_hotkeys_use_keydown_hooks",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 9
+      }
+    },
+    {
+      "name": "next_request_can_buffer_before_pause_ack",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "dwell_status_text_no_longer_repaints_countdown_every_second",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 2
+      }
+    },
+    {
+      "name": "select_status_text_no_longer_promises_fixed_half_second",
+      "ok": true,
+      "detail": {
+        "status_text": "正在确认后双击放大"
+      }
+    },
+    {
+      "name": "detected_issue_auto_pause",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 6
+      }
+    },
+    {
+      "name": "low_texture_zoom_confirm_can_still_pass",
+      "ok": true,
+      "detail": {
+        "confirm_state": "STATE_CONFIRMED",
+        "low_texture_zoom_confirmed": 1.0
+      }
+    },
+    {
+      "name": "fullscreen_retry_sample_can_confirm_low_texture_zoom",
+      "ok": true,
+      "detail": {
+        "confirmed": true
+      }
+    },
+    {
+      "name": "real_fullscreen_failure_page_sample_can_confirm_low_texture_zoom",
+      "ok": true,
+      "detail": {
+        "confirmed": true
+      }
+    },
+    {
+      "name": "real_fullscreen_four_grid_failure_page_is_still_classified_as_grid",
+      "ok": true,
+      "detail": {
+        "layout4_actual": "GRID",
+        "layout4_mean_strength": 9.6981,
+        "layout12_actual": "UNKNOWN",
+        "layout12_mean_strength": 0.7579
+      }
+    },
+    {
+      "name": "fullscreen_six_grid_flat_fallback_is_wired",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 7
+      }
+    },
+    {
+      "name": "action_path_docs",
+      "ok": true,
+      "detail": {
+        "README.md": 7,
+        "README_DEPLOY.md": 4,
+        "HOW_TO_USE.md": 7,
+        "提示词.txt": 1,
+        "提示词_增强版.txt": 2,
+        "LAYOUT_SWITCH_MANUAL.md": 5,
+        "CODEX_LOCAL_ADMIN_PROMPT.txt": 3,
+        "CALIBRATION_GUIDE.md": 2,
+        "MIGRATION_GUIDE.md": 2
+      }
+    },
+    {
+      "name": "build_release_include_list",
+      "ok": true,
+      "detail": {
+        "required_entries": [
+          "compileall.py",
+          "HOW_TO_USE.md",
+          "LAYOUT_SWITCH_MANUAL.md",
+          "CODEX_LOCAL_ADMIN_PROMPT.txt",
+          "inspect_windowed.bat",
+          "inspect_fullscreen.bat",
+          "layout_switcher.py",
+          "runtime_guard.py",
+          "CALIBRATION_GUIDE.md",
+          "MIGRATION_GUIDE.md"
+        ]
+      }
+    },
+    {
+      "name": "semantic_texts",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 4
+      }
+    },
+    {
+      "name": "runtime_guard_popup_auto_heal",
+      "ok": true,
+      "detail": {
+        "issue": "unexpected_related_window",
+        "escape_count": 1,
+        "close_count": 1
+      }
+    },
+    {
+      "name": "runtime_guard_ignores_keywordless_same_process_aux_window",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "title": "VSClient"
+      }
+    },
+    {
+      "name": "runtime_guard_foreground_aux_window_refocuses_without_escape",
+      "ok": true,
+      "detail": {
+        "issue": "unexpected_related_window",
+        "focused": 100,
+        "escape_count": 0
+      }
+    },
+    {
+      "name": "runtime_guard_allows_attached_foreground_surface",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "hwnd": 404
+      }
+    },
+    {
+      "name": "runtime_guard_allows_detached_vsclient_surface",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "hwnd": 505
+      }
+    },
+    {
+      "name": "runtime_guard_ignores_status_overlay_foreground",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "title": "Video Polling Status"
+      }
+    },
+    {
+      "name": "window_manager_related_window_prefilter",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "window_manager_prefers_exact_title_and_process_match",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 4
+      }
+    },
+    {
+      "name": "runtime_guard_interface_auto_heal",
+      "ok": true,
+      "detail": {
+        "issue": "unexpected_interface",
+        "recover_count": 1
+      }
+    },
+    {
+      "name": "flat_grid_expected_view_is_not_misclassified",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "reason": "runtime_view_matches_expected"
+      }
+    },
+    {
+      "name": "repeated_failure_grid_layout_can_still_be_classified_as_grid",
+      "ok": true,
+      "detail": {
+        "actual_view": "GRID",
+        "grid_divider_hits": 3.0,
+        "grid_divider_mean_strength": 56.8818
+      }
+    },
+    {
+      "name": "zoom_probe_precedence_over_grid_probe",
+      "ok": true,
+      "detail": {
+        "actual": "ZOOMED",
+        "zoom_probe_score": 2.2,
+        "grid_probe_score": 10.0
+      }
+    },
+    {
+      "name": "fullscreen_layout_change_can_confirm_zoom",
+      "ok": true,
+      "detail": {
+        "confirmed": true,
+        "full_changed_ratio": 0.1263,
+        "main_changed_ratio": 0.1162
+      }
+    },
+    {
+      "name": "runtime_guard_files_and_config",
+      "ok": true,
+      "detail": {
+        "guard_enabled": true,
+        "post_action_wait_ms": 120,
+        "flat_entropy_max": 2.0
+      }
+    },
+    {
+      "name": "scheduler_uses_fast_window_refresh_for_runtime_view_checks",
+      "ok": true,
+      "detail": {
+        "scheduler_fragments": 3,
+        "window_manager_fragments": 2
+      }
+    },
+    {
+      "name": "pause_ack_no_longer_forces_full_context_refresh",
+      "ok": true,
+      "detail": {
+        "checked": true
+      }
+    },
+    {
+      "name": "guard_stage_view_trusts_runtime_guard_result",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 2
+      }
+    },
+    {
+      "name": "detector_reuses_preview_capture_for_runtime_classification",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "detector_downsamples_surface_metrics_before_heavy_stats",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 4
+      }
+    },
+    {
+      "name": "status_overlay_auto_hide_config",
+      "ok": true,
+      "detail": {
+        "auto_hide_ms": 2200,
+        "stale_hide_ms": 4800
+      }
+    },
+    {
+      "name": "runtime_test_driver_prefers_send_keys_for_function_hotkeys",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 4
+      }
+    },
+    {
+      "name": "preview_failure_precheck_no_longer_skips_action_path",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 3
+      }
+    },
+    {
+      "name": "runtime_test_driver_keeps_real_dwell_timings",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 2
+      }
+    },
+    {
+      "name": "runtime_test_driver_tolerates_windows_log_lock",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 6
+      }
+    },
+    {
+      "name": "runtime_test_driver_restores_windowed_grid_between_scenarios",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 20
+      }
+    },
+    {
+      "name": "runtime_test_driver_does_not_escape_when_windowed_grid_is_already_visible",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "runtime_test_driver_can_override_layout_for_real_grid_regression",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "f9_runtime_driver_recovers_startup_prepare_not_grid_before_queue_check",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 6
+      }
+    },
+    {
+      "name": "runtime_test_driver_can_follow_elevated_relaunch",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 8
+      }
+    },
+    {
+      "name": "prepare_target_recovery_refreshes_grid_probe_only_after_true_grid_confirmation",
+      "ok": true,
+      "detail": {
+        "classify_pos": 51533,
+        "capture_pos": 53699
+      }
+    },
+    {
+      "name": "prepare_target_grid_fast_path_still_syncs_runtime_layout",
+      "ok": true,
+      "detail": {
+        "fast_path_pos": 493,
+        "sync_pos": 776,
+        "return_pos": 854
+      }
+    },
+    {
+      "name": "recent_runtime_layout_sync_prevents_grid_ready_churn",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 10
+      }
+    },
+    {
+      "name": "runtime_layout_visual_scoring_penalizes_dense_false_positive_layouts",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 19
+      }
+    },
+    {
+      "name": "prepare_target_recovers_target_foreground_before_visual_classification",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 10
+      }
+    },
+    {
+      "name": "windowed_mode_detection_caches_ui_marker_probe",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 6
+      }
+    },
+    {
+      "name": "window_manager_tracks_detached_vsclient_render_surface",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "status_runtime_cleans_duplicate_overlay_processes",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "pointer_actions_skip_redundant_runtime_guard_rechecks",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 3
+      }
+    },
+    {
+      "name": "input_guard_tolerates_cursor_probe_access_denied",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 5
+      }
+    },
+    {
+      "name": "scheduler_runtime_layout_sync_is_not_fixed_to_config_layout",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 8
+      }
+    },
+    {
+      "name": "runtime_layout_sync_prefers_uia_detected_layout",
+      "ok": true,
+      "detail": {
+        "layout_switcher_fragments": 11,
+        "scheduler_fragments": 10,
+        "app_fragments": 2
+      }
+    },
+    {
+      "name": "layout_switch_panel_open_retries_for_fullscreen_runtime_detect",
+      "ok": true,
+      "detail": {
+        "checked_fragments": 7
+      }
+    }
+  ]
+}

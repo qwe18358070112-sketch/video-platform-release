@@ -1,0 +1,5 @@
+{
+  "name": "webcontrol-local-service-plugin-session-driver",
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Platform Spike Probe</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --border: #d7dee7;
+      --text: #142033;
+      --muted: #5d6b82;
+      --accent: #0e5bd8;
+      --accent-weak: #e8f0ff;
+      --danger: #a12d2d;
+      --danger-weak: #fdecec;
+      --ok: #1c7a45;
+      --ok-weak: #e9f7ef;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #edf2f8 0%, #f9fbfd 100%);
+      color: var(--text);
+    }
+
+    .page {
+      width: min(1440px, calc(100vw - 32px));
+      margin: 20px auto 32px;
+    }
+
+    .hero {
+      margin-bottom: 16px;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(135deg, #12315f 0%, #0d4ea7 60%, #2d7cff 100%);
+      color: #fff;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 860px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 12px 28px rgba(15, 38, 74, 0.06);
+    }
+
+    .panel h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .hint {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .field textarea {
+      min-height: 96px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #e8edf5;
+      color: var(--text);
+    }
+
+    button.ghost {
+      background: var(--accent-weak);
+      color: var(--accent);
+    }
+
+    .status {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-card {
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: #fafcff;
+    }
+
+    .status-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status-card span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+
+    .log {
+      min-height: 600px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toolbar h2 {
+      margin: 0;
+    }
+
+    .terminal {
+      margin: 0;
+      padding: 18px;
+      background: #0d1727;
+      color: #d8e4ff;
+      min-height: 540px;
+      max-height: 900px;
+      overflow: auto;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .terminal .ok {
+      color: #7ef0af;
+    }
+
+    .terminal .warn {
+      color: #ffd978;
+    }
+
+    .terminal .err {
+      color: #ff9b9b;
+    }
+
+    .callout {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .callout.info {
+      background: var(--accent-weak);
+      color: var(--accent);
+    }
+
+    .callout.warn {
+      background: var(--danger-weak);
+      color: var(--danger);
+    }
+
+    @media (max-width: 1120px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Platform Spike Probe</h1>
+      <p>
+        This page is the first controlled bridge out of desktop UI automation.
+        It validates the local webcontainer bridge, client session, proxy access,
+        resource catalog APIs, and preview URL APIs already found on this machine.
+      </p>
+      <p style="margin-top: 12px;">
+        If this probe succeeds, open
+        <a href="./platform_spike_poc.html?autorun=1" style="color: #fff; font-weight: 700;">Platform Spike POC Shell</a>
+        to continue with controlled 4 / 9 / 12 layout state and tvwall API tests.
+      </p>
+    </section>
+
+    <div class="grid">
+      <div class="stack">
+        <section class="panel">
+          <h2>Bridge</h2>
+          <p class="hint">
+            Run inside the platform webcontainer if possible. In container mode,
+            this page uses <code>window.cefQuery</code> and <code>/proxy</code>.
+          </p>
+          <div class="status">
+            <div class="status-card">
+              <strong>Bridge Mode</strong>
+              <span id="bridge-mode">Detecting...</span>
+            </div>
+            <div class="status-card">
+              <strong>Ticket</strong>
+              <span id="ticket-value">Not loaded</span>
+            </div>
+            <div class="status-card">
+              <strong>Last Camera</strong>
+              <span id="camera-value">Not selected</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-login">Get Login Info</button>
+            <button id="btn-ticket" class="ghost">Get Tickets</button>
+            <button id="btn-service" class="secondary">Get Service Info</button>
+            <button id="btn-clear-state" class="secondary">Clear State</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Platform Access</h2>
+          <p class="hint">
+            For container runs, <code>/proxy</code> should be preferred. For browser-only
+            debugging, fill in <code>Platform Base URL</code> and <code>Token</code>.
+          </p>
+          <div class="field">
+            <label for="platform-base-url">Platform Base URL</label>
+            <input id="platform-base-url" type="text" placeholder="https://host:port" />
+          </div>
+          <div class="field">
+            <label for="platform-token">Token</label>
+            <input id="platform-token" type="text" placeholder="Optional manual token" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="service-type">Service Type</label>
+              <input id="service-type" type="text" value="upm" />
+            </div>
+            <div class="field">
+              <label for="component-id">Component ID</label>
+              <input id="component-id" type="text" value="upm" />
+            </div>
+          </div>
+          <div class="callout info">
+            If <code>Get Login Info</code> returns host details, copy them into
+            <code>Platform Base URL</code>. If the container proxy already carries
+            the session, the manual token field can remain empty.
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Resource Catalog</h2>
+          <div class="field-row">
+            <div class="field">
+              <label for="tree-code">Tree Code</label>
+              <input id="tree-code" type="text" value="0" />
+            </div>
+            <div class="field">
+              <label for="region-page-size">Page Size</label>
+              <input id="region-page-size" type="number" value="50" min="1" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="camera-page-no">Camera Page No</label>
+              <input id="camera-page-no" type="number" value="1" min="1" />
+            </div>
+            <div class="field">
+              <label for="camera-page-size">Camera Page Size</label>
+              <input id="camera-page-size" type="number" value="20" min="1" />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-tree-codes">Tree Codes</button>
+            <button id="btn-regions" class="ghost">Regions</button>
+            <button id="btn-cameras" class="ghost">Cameras</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Preview URL</h2>
+          <div class="field">
+            <label for="camera-index-code">Camera Index Code</label>
+            <input id="camera-index-code" type="text" placeholder="Camera UUID" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="stream-type">Stream Type</label>
+              <select id="stream-type">
+                <option value="0" selected>Main Stream</option>
+                <option value="1">Sub Stream</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="protocol">Protocol</label>
+              <select id="protocol">
+                <option value="ws" selected>ws</option>
+                <option value="hls">hls</option>
+                <option value="rtsp">rtsp</option>
+                <option value="rtmp">rtmp</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="transmode">Transport</label>
+              <select id="transmode">
+                <option value="1" selected>TCP</option>
+                <option value="0">UDP</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="expand">Expand</label>
+              <input id="expand" type="text" placeholder="Optional, e.g. transcode=1" />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-preview-url">Preview URL</button>
+            <button id="btn-fill-from-response" class="secondary">Use First Camera From Last Result</button>
+          </div>
+          <div class="callout warn">
+            This page does not embed a player yet. The first milestone is only to prove
+            that the platform can return a valid preview URL under a controlled runtime.
+          </div>
+        </section>
+      </div>
+
+      <section class="panel log">
+        <div class="toolbar">
+          <h2>Run Log</h2>
+          <div class="actions">
+            <button id="btn-run-full-chain">Run Full Chain</button>
+            <button id="btn-clear-log" class="secondary">Clear Log</button>
+          </div>
+        </div>
+        <pre id="terminal" class="terminal"></pre>
+      </section>
+    </div>
+  </div>
+
+  <script src="./webcontainer_probe.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+# 这是更完整的示例配置。
+# 使用方式：
+# 1. 复制为 config.yaml
+# 2. 先跑一次标定
+# 3. 再按你的轮询顺序和布局要求修改 order / layout / layout_template / cell_labels
+
+window:
+  title_keywords: ["视频融合赋能平台", "视频监控"]
+  process_names: [ClientFrame.exe]
+  focus_before_action: true
+  control_backend: native_engine
+  autohotkey_path: ""
+  native_runtime_enabled: true
+  native_runtime_project: native_runtime/VideoPlatform.NativeProbe/VideoPlatform.NativeProbe.csproj
+  native_runtime_tree_depth: 4
+  native_runtime_startup_timeout_seconds: 20
+  native_runtime_command_timeout_seconds: 4
+  match_timeout_seconds: 5
+  fullscreen_coverage_ratio: 0.96
+  client_margin_tolerance_px: 8
+
+profiles:
+  active_mode: auto
+  windowed:
+    left_ratio: 0.36
+    top_ratio: 0.14
+    right_ratio: 0.998
+    bottom_ratio: 0.998
+  fullscreen:
+    left_ratio: 0.001
+    top_ratio: 0.006
+    right_ratio: 0.998
+    bottom_ratio: 0.976
+
+grid:
+  # 可选：4 / 6 / 9 / 12
+  layout: 12
+
+  # 可选顺序：
+  # row_major / left_to_right      -> 从左到右、从上到下
+  # column_major / top_to_bottom   -> 从上到下、从左到右
+  # custom                         -> 按 custom_sequence 或 active_sequence_profile
+  # favorites_name                 -> 按左侧收藏夹名称顺序
+  order: row_major
+
+  cell_padding_ratio: 0.08
+  click_point_ratio_x: 0.5
+  click_point_ratio_y: 0.45
+  zoom_point_ratio_x: 0.5
+  zoom_point_ratio_y: 0.38
+
+  # 自定义顺序示例（4x3 的物理编号 0~11）：
+  # 第一列 -> 第二列 -> 第三列
+  custom_sequence: [0, 3, 6, 9, 1, 4, 7, 10, 2, 5, 8, 11]
+
+  active_sequence_profile: ""
+  sequence_profiles:
+    left_to_right_standard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    top_to_bottom_standard: [0, 3, 6, 9, 1, 4, 7, 10, 2, 5, 8, 11]
+    zigzag_demo: [0, 1, 2, 5, 4, 3, 6, 7, 8, 11, 10, 9]
+
+  # favorites_name 模式下，名称映射写在这里。
+  # 你后续可以把“浙江舟山普陀山-大厅柱子口”这种真实名称填进来。
+  cell_labels:
+    0: "收藏夹名称1"
+    1: "收藏夹名称2"
+    2: "收藏夹名称3"
+    3: "收藏夹名称4"
+    4: "收藏夹名称5"
+    5: "收藏夹名称6"
+    6: "收藏夹名称7"
+    7: "收藏夹名称8"
+    8: "收藏夹名称9"
+    9: "收藏夹名称10"
+    10: "收藏夹名称11"
+    11: "收藏夹名称12"
+
+  # 留空表示使用规则网格。
+  # 设为 twelve_3x4 可切到另一种 12 宫格。
+  layout_template: ""
+
+  layout_overrides:
+    "4": {rows: 2, cols: 2}
+    "6": {rows: 2, cols: 3}
+    "9": {rows: 3, cols: 3}
+    "12": {rows: 4, cols: 3}
+
+  layout_templates:
+    twelve_4x3:
+      - {row: 0, col: 0, left_ratio: 0.0000, top_ratio: 0.0000, right_ratio: 0.3333, bottom_ratio: 0.2500}
+      - {row: 0, col: 1, left_ratio: 0.3333, top_ratio: 0.0000, right_ratio: 0.6666, bottom_ratio: 0.2500}
+      - {row: 0, col: 2, left_ratio: 0.6666, top_ratio: 0.0000, right_ratio: 1.0000, bottom_ratio: 0.2500}
+      - {row: 1, col: 0, left_ratio: 0.0000, top_ratio: 0.2500, right_ratio: 0.3333, bottom_ratio: 0.5000}
+      - {row: 1, col: 1, left_ratio: 0.3333, top_ratio: 0.2500, right_ratio: 0.6666, bottom_ratio: 0.5000}
+      - {row: 1, col: 2, left_ratio: 0.6666, top_ratio: 0.2500, right_ratio: 1.0000, bottom_ratio: 0.5000}
+      - {row: 2, col: 0, left_ratio: 0.0000, top_ratio: 0.5000, right_ratio: 0.3333, bottom_ratio: 0.7500}
+      - {row: 2, col: 1, left_ratio: 0.3333, top_ratio: 0.5000, right_ratio: 0.6666, bottom_ratio: 0.7500}
+      - {row: 2, col: 2, left_ratio: 0.6666, top_ratio: 0.5000, right_ratio: 1.0000, bottom_ratio: 0.7500}
+      - {row: 3, col: 0, left_ratio: 0.0000, top_ratio: 0.7500, right_ratio: 0.3333, bottom_ratio: 1.0000}
+      - {row: 3, col: 1, left_ratio: 0.3333, top_ratio: 0.7500, right_ratio: 0.6666, bottom_ratio: 1.0000}
+      - {row: 3, col: 2, left_ratio: 0.6666, top_ratio: 0.7500, right_ratio: 1.0000, bottom_ratio: 1.0000}
+    twelve_3x4:
+      - {row: 0, col: 0, left_ratio: 0.0000, top_ratio: 0.0000, right_ratio: 0.2500, bottom_ratio: 0.3333}
+      - {row: 0, col: 1, left_ratio: 0.2500, top_ratio: 0.0000, right_ratio: 0.5000, bottom_ratio: 0.3333}
+      - {row: 0, col: 2, left_ratio: 0.5000, top_ratio: 0.0000, right_ratio: 0.7500, bottom_ratio: 0.3333}
+      - {row: 0, col: 3, left_ratio: 0.7500, top_ratio: 0.0000, right_ratio: 1.0000, bottom_ratio: 0.3333}
+      - {row: 1, col: 0, left_ratio: 0.0000, top_ratio: 0.3333, right_ratio: 0.2500, bottom_ratio: 0.6666}
+      - {row: 1, col: 1, left_ratio: 0.2500, top_ratio: 0.3333, right_ratio: 0.5000, bottom_ratio: 0.6666}
+      - {row: 1, col: 2, left_ratio: 0.5000, top_ratio: 0.3333, right_ratio: 0.7500, bottom_ratio: 0.6666}
+      - {row: 1, col: 3, left_ratio: 0.7500, top_ratio: 0.3333, right_ratio: 1.0000, bottom_ratio: 0.6666}
+      - {row: 2, col: 0, left_ratio: 0.0000, top_ratio: 0.6666, right_ratio: 0.2500, bottom_ratio: 1.0000}
+      - {row: 2, col: 1, left_ratio: 0.2500, top_ratio: 0.6666, right_ratio: 0.5000, bottom_ratio: 1.0000}
+      - {row: 2, col: 2, left_ratio: 0.5000, top_ratio: 0.6666, right_ratio: 0.7500, bottom_ratio: 1.0000}
+      - {row: 2, col: 3, left_ratio: 0.7500, top_ratio: 0.6666, right_ratio: 1.0000, bottom_ratio: 1.0000}
+
+favorites:
+  enabled: true
+  left_panel_width_ratio: 0.28
+  top_exclusion_ratio: 0.08
+  cache_file: tmp/favorites_cache.json
+  visible_only: true
+  max_entries: 64
+  include_control_types: [TreeItem, ListItem, Text]
+  exclude_texts: []
+
+runtime_guard:
+  enabled: true
+  verify_before_action: true
+  verify_after_action: true
+  verify_during_dwell: true
+  verify_foreground_window: true
+  detect_related_popups: true
+  auto_close_related_popups: true
+  auto_refocus_external_window: true
+  post_action_wait_ms: 220
+  settle_after_recover_ms: 600
+  rect_drift_tolerance_px: 24
+  consecutive_fail_limit: 3
+  screenshot_dir: logs/guard
+  popup_title_keywords: ["提示", "告警", "错误", "异常", "消息", "确认", "warning", "error", "dialog", "prompt"]
+
+layout_switch:
+  require_cleared_scene_before_switch: true
+  fail_closed_on_guard_error: true
+
+controls:
+  max_queued_next_steps: 0
+  runtime_hotkeys_drive_client_ui: false
+  runtime_hotkeys_require_paused: true
+
+timing:
+  focus_delay_ms: 300
+  click_after_select_ms: 260
+  select_settle_ms: 320
+  dwell_seconds: 4
+  post_restore_dwell_seconds: 4
+  between_cells_ms: 500
+  recovery_wait_ms: 800
+  double_click_interval_ms: 180
+
+hotkeys:
+  profile_source_toggle: f1
+  mode_cycle: f7
+  start_pause: f2
+  next_cell: f9
+  stop: f10
+  emergency_recover: f11
+  layout_cycle: f8
+  calibration_capture: f6
+  debounce_ms: 700
+  next_cell_debounce_ms: 120
+
+detection:
+  enabled: true
+  skip_on_detected_issue: true
+  save_failure_screenshots: true
+  save_anomaly_screenshot: true
+  screenshot_dir: logs/screenshots
+  precheck_crop_ratio: 0.92
+  black_screen_confirm_frames: 2
+  preview_failure_confirm_frames: 2
+  black_screen_mean_threshold: 28
+  black_screen_std_threshold: 16
+  black_screen_bright_ratio_threshold: 0.01
+  black_screen_edge_ratio_threshold: 0.015
+  failure_dark_ratio_threshold: 0.72
+  failure_bright_ratio_min: 0.003
+  failure_bright_ratio_max: 0.12
+  failure_edge_ratio_min: 0.01
+  failure_edge_ratio_max: 0.12
+  zoom_confirm_mean_diff_threshold: 18.0
+  zoom_confirm_changed_ratio_threshold: 0.14
+  resume_zoomed_mean_diff_max: 10.0
+  resume_zoomed_changed_ratio_max: 0.08
+  resume_grid_mean_diff_min: 18.0
+  resume_grid_changed_ratio_min: 0.18
+  runtime_flat_entropy_max: 2.0
+  runtime_flat_edge_ratio_max: 0.04
+  runtime_flat_dominant_ratio_min: 0.55
+  path_retry_limit: 1
+  max_fail_streak_before_cooldown: 3
+  issue_cooldown_cycles: 2
+  use_orb_zoom_confirm: true
+
+input_guard:
+  enabled: true
+  mouse_move_threshold: 90
+  idle_resume_seconds: 5
+  poll_interval_ms: 200
+  suppress_after_programmatic_input_ms: 2500
+  resume_settle_ms: 1800
+
+status_overlay:
+  enabled: true
+  status_file: tmp/runtime_status.json
+  close_delay_ms: 2600
+  auto_hide_ms: 2200
+  stale_hide_ms: 4800
+  safe_strip_height_px: 96
+
+logging:
+  level: INFO
+  log_dir: logs
+  keep_console: true

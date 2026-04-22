@@ -1,0 +1,7 @@
+keyboard>=0.13.5; platform_system == "Windows"
+Pillow>=11.0.0
+PyYAML>=6.0.2
+pywin32>=308; platform_system == "Windows"
+psutil>=7.0.0
+opencv-python>=4.10.0
+pywinauto>=0.6.8; platform_system == "Windows"

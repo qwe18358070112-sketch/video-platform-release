@@ -1,0 +1,184 @@
+你现在要在我的本机上，以“高级 Windows 桌面自动化工程师 + Python 修复工程师 + 自测工程师 + 发布工程师”的身份，继续接管并完善这个项目。
+
+【你的执行环境】
+1. 你现在操作的是我的本地 Windows 电脑，不是云端容器。
+2. 我会给你管理员权限。
+3. 你可以使用本机终端、Python、PowerShell、文件系统、浏览器。
+4. 本机已经安装视频融合赋能平台客户端，目标程序路径参考：
+   D:\opsmgr\Infovision Foresight\client\framework\infosightclient.1\bin\ClientFrame
+5. 项目目录就是我提供给你的 `video_platform_release` 文件夹。
+
+【先读后做】
+开始执行前，先完整阅读以下文件：
+- README.md
+- HOW_TO_USE.md
+- README_DEPLOY.md
+- config.yaml
+- self_test.py
+- scheduler.py
+- common.py
+- grid_mapper.py
+- controller.py
+- detector.py
+- window_manager.py
+- CODEX_LOCAL_ADMIN_PROMPT.txt
+
+【绝对不能搞错的动作路径】
+本项目的单路动作路径，最终以这条定义为准：
+
+单击选中 -> 双击放大 -> 停留 dwell_seconds 秒 -> 双击返回 -> 停留 post_restore_dwell_seconds 秒 -> 下一路
+
+你不允许把它简化成：
+- 直接双击放大 -> 下一路
+- 双击返回后立刻下一路
+- 不先单击选中就直接双击
+
+【绝对不能搞错的恢复逻辑】
+1. F11 = 返回宫格并重走当前未完成动作路径。
+2. F11 不允许直接跳下一路。
+3. 自动恢复优先恢复当前路径，只有连续失败达到阈值时才进入冷却跳过。
+4. F9 在暂停状态下必须可以连续使用；每按一次都自动选中下一路，但程序保持暂停。
+
+
+【这轮新增的高风险问题，你必须优先处理】
+1. 客户端卡顿时，程序可能误点击到错误界面、错误窗口、标题栏、空白页、弹窗。
+2. 你不能只依赖原有状态机；必须检查并使用 `runtime_guard.py` 这层守卫逻辑。
+3. 你必须确认：
+   - 前台窗口漂移能被识别
+   - 同进程弹窗能被识别
+   - 错误界面 / 纯色界面 / 陌生界面能被识别
+   - 自动修复成功后会重走当前路径
+   - 连续失败后会自动暂停，而不是继续乱点
+
+【你必须实际执行的标定工作】
+1. 先读 `CALIBRATION_GUIDE.md`
+2. 非全屏执行：`python app.py --calibrate windowed`
+3. 全屏执行：`python app.py --calibrate fullscreen`
+4. 生成并检查：
+   - `python app.py --inspect-calibration windowed`
+   - `python app.py --inspect-calibration fullscreen`
+5. 标定图不准就重做，不允许带着错误标定进入自动点击
+
+【目录使用规则】
+1. 不要直接在我的旧项目目录上继续野蛮修改。
+2. 先把新交付目录作为主目录。
+3. 旧目录只做备份和问题对照。
+4. 若旧目录里有仍然有效的配置和日志，可以迁移到新目录，但迁移后也要重新自测。
+
+【你本轮必须完成的工作顺序】
+第 1 步：确认环境
+- 确认 Python 可用
+- 确认项目目录完整
+- 确认目标客户端是否正在运行
+- 确认是否需要管理员权限重启当前终端
+
+第 2 步：安装与静态检查
+执行：
+- install_deps.bat
+- python -m compileall .
+- python self_test.py
+
+说明：
+- `python -m compileall .` 只检查项目源码，会自动跳过 `.venv / dist / logs / tmp / __pycache__`
+
+如果失败：
+- 直接修复
+- 再跑 compileall
+- 再跑 self_test.py
+- 直到通过
+
+第 3 步：检查与修复动作路径
+重点检查：
+- README、提示词、部署文档、自测脚本中的动作路径描述是否一致
+- scheduler.py 的状态机是否完整覆盖：SELECT_TARGET -> SELECT_CONFIRM -> ZOOM_IN -> ZOOM_CONFIRM -> ZOOM_DWELL -> ZOOM_OUT -> GRID_CONFIRM -> GRID_DWELL -> NEXT
+- controller.py 是否明确用双击执行 zoom_out
+- config.yaml 是否同时包含 dwell_seconds 与 post_restore_dwell_seconds
+- `--switch-layout` 是否在执行后核对中央宫格结果，而不是只信命令返回成功
+
+如果发现任何文件把动作路径写错、写弱、写漏：
+- 直接修复
+- 补充中文注释
+- 补充自测项
+
+第 4 步：本机实测
+按下面顺序实测：
+1. 非全屏 12 宫格
+2. F11 恢复
+3. F9 连续步进
+4. 全屏 12 宫格
+5. 9 / 6 / 4 宫格
+6. favorites_name
+
+每轮测试都要记录：
+- 预期
+- 实际
+- 是否通过
+- 日志文件位置
+- 如失败，失败在哪个状态
+
+第 5 步：如果实测失败，继续修复
+- 不要只写分析
+- 必须继续修代码
+- 修完再跑 `python -m compileall .`
+- 再跑 self_test.py
+- 再回到本机实测
+- 直到成功或明确定位为目标客户端自身限制
+
+第 6 步：输出最终交付结果
+最终你要给我的不是一段口头说明，而是：
+1. 修改文件清单
+2. 每个文件改了什么
+3. 自测结果
+4. 本机实测结果
+5. 仍存在的风险点
+6. 新的发布包路径
+
+【你必须优先检查的配置项】
+- grid.layout
+- grid.order
+- grid.custom_sequence
+- grid.layout_template
+- grid.cell_labels
+- timing.select_settle_ms
+- timing.dwell_seconds
+- timing.post_restore_dwell_seconds
+- controls.max_queued_next_steps
+- profiles.active_mode
+- window.control_backend
+
+【你必须遵守的工程规则】
+1. 先最小改动，后必要重构。
+2. 不要改动与本需求无关的大段逻辑。
+3. 不能假装已经测试过；没测就明确写“未测”。
+4. 所有新增代码都要带中文注释，不能影响运行。
+5. 发现文档与代码不一致，必须同步修文档。
+6. 发现代码与提示词不一致，必须同步修提示词。
+7. 每次完成修改后，都要再次执行：
+   - python -m compileall 项目根目录
+   - python self_test.py
+
+【你这轮的成功标准】
+只有同时满足下面条件，才算完成：
+1. compileall 通过
+2. self_test.py 通过
+3. README / 部署说明 / 提示词 / 自测，对动作路径描述完全一致
+4. 本机至少完成一轮非全屏实测
+5. F11 不再跳下一路
+6. F9 可连续步进
+7. 能产出新的发布包
+
+
+【自动识别与手动切布局要求】
+1. 必须核查并保持这两条链路可用：
+   - `window_manager.detect_mode()`：自动识别 `windowed / fullscreen`
+   - `scheduler._try_sync_runtime_layout()` + `layout_switcher.detect_current_layout()`：自动识别当前 `4 / 6 / 9 / 12` 宫格
+2. 如果你修复了自动识别逻辑，必须同步修：
+   - `README.md`
+   - `HOW_TO_USE.md`
+   - `LAYOUT_SWITCH_MANUAL.md`
+   - 当前提示词文件
+3. 手动切宫格只能走两种正确入口：
+   - `python app.py --switch-layout 4|6|9|12|13`
+   - 顶部工具栏里的 `窗口分割`
+4. 不允许把左侧收藏夹树当成布局切换入口。
+5. `--switch-layout` 执行后，必须人工核对中央宫格真的已经变化，不能只信命令返回成功。

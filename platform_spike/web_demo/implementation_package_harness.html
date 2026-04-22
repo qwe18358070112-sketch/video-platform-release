@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Implementation Package Harness</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --border: #d7dee7;
+      --text: #142033;
+      --muted: #5d6b82;
+      --accent: #0e5bd8;
+      --accent-weak: #e8f0ff;
+      --ok: #1c7a45;
+      --warn: #a55b11;
+      --danger: #922f2f;
+      --preview: #0f1a2d;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef3f9 0%, #fafbfd 100%);
+    }
+    .page {
+      width: min(1440px, calc(100vw - 32px));
+      margin: 20px auto 32px;
+    }
+    .hero, .panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: 0 12px 28px rgba(15, 38, 74, 0.06);
+    }
+    .hero {
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #132d58 0%, #1358b8 50%, #2f88ff 100%);
+      color: #fff;
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 28px; }
+    .hero p { margin: 0; line-height: 1.6; color: rgba(255,255,255,0.9); }
+    .layout {
+      display: grid;
+      grid-template-columns: 420px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .stack { display: grid; gap: 16px; }
+    .panel { padding: 18px; }
+    .panel h2 { margin: 0 0 8px; font-size: 18px; }
+    .hint { margin: 0 0 14px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .field { margin-bottom: 12px; }
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+    .field textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+    .field-row, .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .summary-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 12px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.secondary { background: #e8edf5; color: var(--text); }
+    button.ghost { background: var(--accent-weak); color: var(--accent); }
+    button.danger { background: #f5d9d9; color: var(--danger); }
+    .status-card {
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: #fafcff;
+    }
+    .status-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .status-card span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .preview-surface {
+      min-height: 220px;
+      border-radius: 18px;
+      border: 1px solid #203454;
+      background:
+        radial-gradient(circle at top left, rgba(66, 119, 255, 0.28), transparent 35%),
+        linear-gradient(180deg, #0c1426 0%, #101d34 100%);
+      padding: 16px;
+      color: #dce7ff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+    .preview-surface .badge {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .snapshot-wrap {
+      display: grid;
+      gap: 12px;
+    }
+    pre {
+      margin: 0;
+      padding: 14px;
+      border-radius: 14px;
+      background: #0f1728;
+      color: #d9e4ff;
+      overflow: auto;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Implementation Package Harness</h1>
+      <p>
+        这个页面专门用来加载 materialized implementation package，验证 manifest、wiring、bridge、driver、health
+        的最小运行闭环。它不依赖政务网，适合在真正接线上游平台之前先把 package 自身跑顺。
+      </p>
+    </section>
+
+    <div class="layout">
+      <div class="stack">
+        <section class="panel">
+          <h2>Package Loader</h2>
+          <p class="hint">默认指向 staged harness package。你也可以改成其他同源目录 URL。</p>
+          <div class="field">
+            <label for="package-base-url">Package Base URL</label>
+            <input id="package-base-url" type="text" value="./harness_packages/renderer-package-web-plugin-stub-webcontrol-local-service-plugin-session-driver/" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="camera-index-code">Camera Index Code</label>
+              <input id="camera-index-code" type="text" value="mock-camera-01" />
+            </div>
+            <div class="field">
+              <label for="preview-url">Preview URL</label>
+              <input id="preview-url" type="text" value="mock://preview/01" />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-load-package">Load Package</button>
+            <button id="btn-reset-runtime" class="secondary">Reset Runtime</button>
+          </div>
+          <div class="actions">
+            <button id="btn-run-init" class="secondary">Init</button>
+            <button id="btn-run-attach" class="secondary">Attach</button>
+            <button id="btn-run-refresh" class="secondary">Refresh</button>
+            <button id="btn-run-detach" class="secondary">Detach</button>
+            <button id="btn-run-dispose" class="secondary">Dispose</button>
+          </div>
+          <div class="actions">
+            <button id="btn-run-all" class="ghost">Run Full Lifecycle</button>
+            <button id="btn-export-report" class="ghost">Export Harness Report</button>
+          </div>
+          <div class="summary-grid">
+            <div class="status-card">
+              <strong>Load State</strong>
+              <span id="load-state">Not loaded</span>
+            </div>
+            <div class="status-card">
+              <strong>Runtime ID</strong>
+              <span id="runtime-id">None</span>
+            </div>
+            <div class="status-card">
+              <strong>Last Action</strong>
+              <span id="last-action">None</span>
+            </div>
+            <div class="status-card">
+              <strong>Bridge Keys</strong>
+              <span id="bridge-keys">0</span>
+            </div>
+            <div class="status-card">
+              <strong>Driver Keys</strong>
+              <span id="driver-keys">0</span>
+            </div>
+            <div class="status-card">
+              <strong>Health Keys</strong>
+              <span id="health-keys">0</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Host Bridge Stub</h2>
+          <p class="hint">这里展示 harness 自动生成的 host bridge stub 和实际调用记录。</p>
+          <div class="field">
+            <label for="host-bridge-buffer">Host Bridge Calls</label>
+            <textarea id="host-bridge-buffer" readonly></textarea>
+          </div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="panel">
+          <h2>Preview Surface</h2>
+          <div id="preview-surface" class="preview-surface">
+            <div>
+              <div class="badge">Preview Surface</div>
+              <p id="preview-surface-status">Waiting for package load.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Package Snapshots</h2>
+          <div class="snapshot-wrap">
+            <div>
+              <strong>Manifest</strong>
+              <pre id="manifest-snapshot">No manifest loaded yet.</pre>
+            </div>
+            <div>
+              <strong>Runtime Wiring</strong>
+              <pre id="wiring-snapshot">No runtime wiring loaded yet.</pre>
+            </div>
+            <div>
+              <strong>Lifecycle Results</strong>
+              <pre id="lifecycle-snapshot">No lifecycle results yet.</pre>
+            </div>
+            <div>
+              <strong>Harness Report</strong>
+              <pre id="report-snapshot">No harness report yet.</pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Run Log</h2>
+          <pre id="terminal">No events yet.</pre>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./implementation_package_harness.js"></script>
+</body>
+</html>

@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Platform Spike POC</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --border: #d7dee7;
+      --text: #142033;
+      --muted: #5d6b82;
+      --accent: #0e5bd8;
+      --accent-weak: #e8f0ff;
+      --danger: #a12d2d;
+      --danger-weak: #fdecec;
+      --ok: #1c7a45;
+      --ok-weak: #e9f7ef;
+      --tile-border: #2e4d7e;
+      --tile-selected: #2d7cff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(180deg, #edf2f8 0%, #f9fbfd 100%);
+      color: var(--text);
+    }
+
+    .page {
+      width: min(1560px, calc(100vw - 32px));
+      margin: 20px auto 32px;
+    }
+
+    .hero {
+      margin-bottom: 16px;
+      padding: 22px 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0d2d59 0%, #0f4ca4 55%, #2c83ff 100%);
+      color: #fff;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 980px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 430px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .stack,
+    .main-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 12px 28px rgba(15, 38, 74, 0.06);
+    }
+
+    .panel h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .hint {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .field { margin-bottom: 12px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .field textarea {
+      min-height: 90px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field-row,
+    .status-grid,
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 14px;
+      gap: 10px;
+    }
+
+    .actions,
+    .toolbar-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .actions { margin-top: 12px; }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button.secondary { background: #e8edf5; color: var(--text); }
+    button.ghost { background: var(--accent-weak); color: var(--accent); }
+    button.danger { background: #f5d9d9; color: #822b2b; }
+
+    .status-card,
+    .summary-card {
+      border-radius: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: #fafcff;
+    }
+
+    .status-card strong,
+    .summary-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status-card span,
+    .summary-card span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+
+    .callout {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .callout.info { background: var(--accent-weak); color: var(--accent); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #edf4ff;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .wall-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .toolbar-group strong {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .preview-stage {
+      --cols: 2;
+      display: grid;
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .preview-stage.fullscreen { --cols: 1; }
+
+    .tile {
+      min-height: 210px;
+      border-radius: 16px;
+      border: 1px solid var(--tile-border);
+      background:
+        radial-gradient(circle at top left, rgba(57, 130, 255, 0.32), transparent 36%),
+        linear-gradient(180deg, #10213d 0%, #091121 100%);
+      color: #e4edff;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(9, 17, 33, 0.22);
+    }
+
+    .tile.selected {
+      border-color: var(--tile-selected);
+      box-shadow: 0 0 0 2px rgba(45, 124, 255, 0.25), 0 14px 28px rgba(9, 17, 33, 0.28);
+    }
+
+    .tile.empty { border-style: dashed; opacity: 0.92; }
+
+    .tile.polling {
+      border-color: #71b0ff;
+      box-shadow: 0 0 0 2px rgba(113, 176, 255, 0.22), 0 14px 28px rgba(9, 17, 33, 0.28);
+    }
+
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .tile-title {
+      font-size: 13px;
+      color: rgba(228, 237, 255, 0.82);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .tile-index {
+      display: inline-flex;
+      min-width: 34px;
+      min-height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      font-weight: 700;
+    }
+
+    .tile-camera {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .tile-screen {
+      position: relative;
+      min-height: 112px;
+      margin-bottom: 12px;
+      border-radius: 14px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(86, 177, 255, 0.55), transparent 28%),
+        radial-gradient(circle at 80% 76%, rgba(27, 106, 255, 0.38), transparent 32%),
+        linear-gradient(135deg, rgba(11, 25, 52, 0.98), rgba(18, 55, 101, 0.96));
+      border: 1px solid rgba(125, 178, 255, 0.18);
+    }
+
+    .tile-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(transparent 24%, rgba(255, 255, 255, 0.04) 25%, transparent 26%, transparent 49%, rgba(255, 255, 255, 0.04) 50%, transparent 51%, transparent 74%, rgba(255, 255, 255, 0.04) 75%, transparent 76%),
+        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.04) 25%, transparent 26%, transparent 49%, rgba(255, 255, 255, 0.04) 50%, transparent 51%, transparent 74%, rgba(255, 255, 255, 0.04) 75%, transparent 76%);
+      opacity: 0.46;
+    }
+
+    .tile-screen::after {
+      content: "";
+      position: absolute;
+      left: -35%;
+      top: 0;
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(160, 219, 255, 0.26), transparent);
+      transform: skewX(-18deg);
+      animation: sweep 3.2s linear infinite;
+    }
+
+    .tile-screen.live::after { animation-duration: 2.3s; }
+
+    .tile-screen-head,
+    .tile-screen-foot {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+    }
+
+    .tile-screen-foot {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding-top: 0;
+    }
+
+    .tile-screen-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(230, 239, 255, 0.94);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ff6d6d;
+      box-shadow: 0 0 0 6px rgba(255, 109, 109, 0.16);
+    }
+
+    .tile-screen-route {
+      font-size: 12px;
+      color: rgba(222, 235, 255, 0.92);
+    }
+
+    .tile-stream-url {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 42px;
+      z-index: 1;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      color: rgba(222, 235, 255, 0.78);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .signal {
+      display: inline-flex;
+      align-items: end;
+      gap: 3px;
+      min-height: 18px;
+    }
+
+    .signal span {
+      width: 4px;
+      border-radius: 999px;
+      background: rgba(214, 231, 255, 0.3);
+    }
+
+    .signal span:nth-child(1) { height: 6px; }
+    .signal span:nth-child(2) { height: 10px; }
+    .signal span:nth-child(3) { height: 14px; }
+    .signal span:nth-child(4) { height: 18px; }
+    .tile-screen.live .signal span { background: #9fd0ff; }
+
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #58bfff, #b7ebff);
+      transition: width 160ms linear;
+    }
+
+    @keyframes sweep {
+      0% { transform: translateX(0) skewX(-18deg); }
+      100% { transform: translateX(420%) skewX(-18deg); }
+    }
+
+    .tile-meta {
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(228, 237, 255, 0.82);
+    }
+
+    .tile-url {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(228, 237, 255, 0.9);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      word-break: break-all;
+      max-height: 86px;
+      overflow: auto;
+    }
+
+    .tile-actions,
+    .camera-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tile-actions button,
+    .camera-actions button {
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+
+    .tile-actions button.secondary {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+    }
+
+    .camera-table-wrap,
+    .snapshot-wrap {
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #edf2f7;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    th {
+      background: #f7fafe;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    .snapshot {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .snapshot pre,
+    .terminal {
+      margin: 0;
+      padding: 18px;
+      background: #0d1727;
+      color: #d8e4ff;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow: auto;
+    }
+
+    .snapshot pre { min-height: 120px; border-radius: 12px; padding: 12px; }
+
+    .runtime-io-buffer {
+      min-height: 150px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    .log-panel {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .log-toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal {
+      min-height: 320px;
+      max-height: 720px;
+    }
+
+    .terminal .ok { color: #7ef0af; }
+    .terminal .warn { color: #ffd978; }
+    .terminal .err { color: #ff9b9b; }
+
+    @media (max-width: 1260px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 860px) {
+      .field-row,
+      .status-grid,
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Platform Spike POC Shell</h1>
+      <p>
+        这张页不再模拟桌面客户端识别链，而是直接承载平台会话、资源查询、预览 URL 获取、
+        本地受控宫格状态机，以及电视墙 tvwall 控制接口。目标是把
+        “4 宫格 -> 9 宫格 -> 放大一路 -> 返回” 先变成一条可观测、可记录、可替换播放内核的受控闭环。
+      </p>
+    </section>
+
+    <div class="layout">
+      <div class="stack">
+        <section class="panel">
+          <h2>Bridge And Session</h2>
+          <p class="hint">
+            优先在平台 webcontainer 中运行。容器内走 <code>window.cefQuery</code> 与 <code>/proxy</code>，
+            浏览器模式则需要手工填写平台地址和票据。
+          </p>
+          <div class="status-grid">
+            <div class="status-card">
+              <strong>Bridge Mode</strong>
+              <span id="bridge-mode">Detecting...</span>
+            </div>
+            <div class="status-card">
+              <strong>Runtime Mode</strong>
+              <span id="runtime-mode-value">Live API</span>
+            </div>
+            <div class="status-card">
+              <strong>Ticket</strong>
+              <span id="ticket-value">Not loaded</span>
+            </div>
+            <div class="status-card">
+              <strong>Layout</strong>
+              <span id="layout-value">4-grid</span>
+            </div>
+            <div class="status-card">
+              <strong>Selected Tile</strong>
+              <span id="selected-tile-value">Tile 1</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-login">Get Login Info</button>
+            <button id="btn-ticket" class="ghost">Get Tickets</button>
+            <button id="btn-service" class="secondary">Get Service Info</button>
+            <button id="btn-run-min-chain" class="secondary">Run Minimal Chain</button>
+            <button id="btn-enable-mock" class="ghost">Enable Mock Replay</button>
+            <button id="btn-disable-mock" class="secondary">Back To Live API</button>
+            <button id="btn-run-local-demo" class="secondary">Run Offline Demo</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Platform Access</h2>
+          <div class="field">
+            <label for="platform-base-url">Platform Base URL</label>
+            <input id="platform-base-url" type="text" placeholder="https://host:port" />
+          </div>
+          <div class="field">
+            <label for="platform-token">Token</label>
+            <input id="platform-token" type="text" placeholder="Optional manual token" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="service-type">Service Type</label>
+              <input id="service-type" type="text" value="upm" />
+            </div>
+            <div class="field">
+              <label for="component-id">Component ID</label>
+              <input id="component-id" type="text" value="upm" />
+            </div>
+          </div>
+          <div class="callout info">
+            这张页优先兼容本机已经存在的容器桥。如果 <code>GetLoginInfo</code> 带回平台地址，
+            页面会尝试自动回填 <code>Platform Base URL</code>。如果当前不在政务网，可以切到
+            <code>Mock Replay</code>，直接回放本地 4 / 9 / 12 宫格、放大、返回链。
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Container Auth Probe</h2>
+          <p class="hint">
+            这块专门给“视频监控”入口用。页面运行在客户端 webcontainer 里时，会直接复用当前容器会话、
+            `getTickets` 和 `/proxy`，对 `xres-search` / `tvms` 做最小认证探测，并生成一段可直接复制给我的结果块。
+          </p>
+          <div class="status-grid">
+            <div class="status-card">
+              <strong>Probe Status</strong>
+              <span id="auth-probe-status-value">Idle</span>
+            </div>
+            <div class="status-card">
+              <strong>Xres Probe</strong>
+              <span id="auth-probe-xres-value">Not run</span>
+            </div>
+            <div class="status-card">
+              <strong>TVMS Probe</strong>
+              <span id="auth-probe-tvms-value">Not run</span>
+            </div>
+            <div class="status-card">
+              <strong>Contexts</strong>
+              <span id="auth-probe-context-value">/xres-search · /tvms</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-run-auth-probe">Run Container Auth Probe</button>
+            <button id="btn-copy-auth-probe" class="secondary">Copy Probe Result</button>
+          </div>
+          <div class="field">
+            <label for="auth-probe-result">Auth Probe Result</label>
+            <textarea id="auth-probe-result" readonly>Waiting for container auth probe...</textarea>
+          </div>
+          <div class="callout info">
+            如果下次我让你只“进入视频监控并停住”，这里就会自动生成结果。
+            你只需要把这一整段文本复制给我，不需要再解释页面上发生了什么。
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Resource Discovery</h2>
+          <div class="field-row">
+            <div class="field">
+              <label for="tree-code">Tree Code</label>
+              <input id="tree-code" type="text" value="0" />
+            </div>
+            <div class="field">
+              <label for="region-page-size">Region Page Size</label>
+              <input id="region-page-size" type="number" value="50" min="1" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="camera-page-no">Camera Page No</label>
+              <input id="camera-page-no" type="number" value="1" min="1" />
+            </div>
+            <div class="field">
+              <label for="camera-page-size">Camera Page Size</label>
+              <input id="camera-page-size" type="number" value="20" min="1" />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-tree-codes">Tree Codes</button>
+            <button id="btn-regions" class="ghost">Regions</button>
+            <button id="btn-cameras" class="ghost">Cameras</button>
+            <button id="btn-bind-first" class="secondary">Bind First Cameras</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Preview URL Input</h2>
+          <div class="field">
+            <label for="camera-index-code">Camera Index Code</label>
+            <input id="camera-index-code" type="text" placeholder="Camera UUID" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="stream-type">Stream Type</label>
+              <select id="stream-type">
+                <option value="0" selected>Main Stream</option>
+                <option value="1">Sub Stream</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="protocol">Protocol</label>
+              <select id="protocol">
+                <option value="ws" selected>ws</option>
+                <option value="hls">hls</option>
+                <option value="rtsp">rtsp</option>
+                <option value="rtmp">rtmp</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="transmode">Transport</label>
+              <select id="transmode">
+                <option value="1" selected>TCP</option>
+                <option value="0">UDP</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="expand">Expand</label>
+              <input id="expand" type="text" placeholder="Optional, e.g. transcode=1" />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-preview-url">Preview URL</button>
+            <button id="btn-resolve-bound" class="ghost">Resolve Bound Tiles</button>
+            <button id="btn-clear-wall" class="danger">Clear Wall</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Local Polling Runtime</h2>
+          <p class="hint">
+            这部分完全不依赖政务网。它先把“轮询语义”落在自有运行时里：从已绑定 tile 生成路线，
+            支持停留时间、下一路、全屏轮巡和本地持久化。
+          </p>
+          <div class="field-row">
+            <div class="field">
+              <label for="polling-mode">Polling Mode</label>
+              <select id="polling-mode">
+                <option value="select" selected>Select Tile</option>
+                <option value="fullscreen">Fullscreen Route</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="polling-dwell-ms">Dwell Milliseconds</label>
+              <input id="polling-dwell-ms" type="number" value="2200" min="300" step="100" />
+            </div>
+          </div>
+          <div class="status-grid">
+            <div class="status-card">
+              <strong>Polling State</strong>
+              <span id="polling-state-value">Idle</span>
+            </div>
+            <div class="status-card">
+              <strong>Route Length</strong>
+              <span id="polling-route-length-value">0</span>
+            </div>
+            <div class="status-card">
+              <strong>Current Route</strong>
+              <span id="polling-current-value">Not started</span>
+            </div>
+            <div class="status-card">
+              <strong>Cycle Count</strong>
+              <span id="polling-cycle-value">0</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-seed-polling" class="ghost">Use Bound Tiles</button>
+            <button id="btn-start-polling">Start Polling</button>
+            <button id="btn-stop-polling" class="secondary">Stop Polling</button>
+            <button id="btn-step-polling" class="secondary">Step Next</button>
+            <button id="btn-save-prefs" class="secondary">Save Prefs</button>
+          </div>
+          <div class="callout info">
+            当前路线只从已经绑定监控点的 tile 生成，不再依赖外部客户端“当前到底是第几宫格”的识别。
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Renderer Adapter</h2>
+          <p class="hint">
+            这里先不接真实播放器，只把承载策略固定下来。后面接 `ws / hls / web plugin` 时，直接替换 adapter，
+            不再改 tile、布局和轮询状态机。
+          </p>
+          <div class="field-row">
+            <div class="field">
+              <label for="renderer-kind">Renderer Kind</label>
+              <select id="renderer-kind">
+                <option value="mock-ws" selected>Mock WS Renderer</option>
+                <option value="mock-hls">Mock HLS Renderer</option>
+                <option value="web-plugin-stub">Web Plugin Stub</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="renderer-auto-attach">Auto Attach Ready Tiles</label>
+              <select id="renderer-auto-attach">
+                <option value="1" selected>Enabled</option>
+                <option value="0">Disabled</option>
+              </select>
+            </div>
+          </div>
+          <div class="status-grid">
+            <div class="status-card">
+              <strong>Renderer Mode</strong>
+              <span id="renderer-mode-value">Mock WS Renderer</span>
+            </div>
+            <div class="status-card">
+              <strong>Attached Tiles</strong>
+              <span id="renderer-attached-value">0</span>
+            </div>
+            <div class="status-card">
+              <strong>Ready Tiles</strong>
+              <span id="renderer-ready-value">0</span>
+            </div>
+            <div class="status-card">
+              <strong>Last Event</strong>
+              <span id="renderer-event-value">Idle</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-attach-renderers">Attach Ready Tiles</button>
+            <button id="btn-detach-renderers" class="secondary">Detach All</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Runtime Snapshot</h2>
+          <p class="hint">
+            把当前布局、tile 绑定、轮询路线和 renderer 策略固化成本地快照，后面切回真实接口后可以继续沿用这套恢复语义。
+          </p>
+          <div class="actions">
+            <button id="btn-save-session">Save Session Snapshot</button>
+            <button id="btn-load-session" class="secondary">Load Session Snapshot</button>
+            <button id="btn-reset-session" class="danger">Reset Snapshot</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Adapter Diagnostics</h2>
+          <p class="hint">
+            这里把 renderer 接线计划、运行态 bundle 和导入导出都固定下来。后面切到真实 `ws / hls / plugin`
+            时，只需要替换 adapter attach 实现，不再重写布局和轮询层。
+          </p>
+          <div class="status-grid">
+            <div class="status-card">
+              <strong>Selected Tile Payload</strong>
+              <span id="renderer-selected-payload-value">Tile 1 / pending</span>
+            </div>
+            <div class="status-card">
+              <strong>Runtime Bundle</strong>
+              <span id="runtime-bundle-value">Not exported</span>
+            </div>
+            <div class="status-card">
+              <strong>Command Queue</strong>
+              <span id="renderer-command-queue-value">0 pending</span>
+            </div>
+            <div class="status-card">
+              <strong>Last Bridge Action</strong>
+              <span id="renderer-bridge-action-value">Idle</span>
+            </div>
+            <div class="status-card">
+              <strong>Driver Mode</strong>
+              <span id="renderer-driver-mode-value">Dry Run</span>
+            </div>
+            <div class="status-card">
+              <strong>Last Driver Run</strong>
+              <span id="renderer-driver-run-value">Not executed</span>
+            </div>
+            <div class="status-card">
+              <strong>Driver State</strong>
+              <span id="renderer-driver-state-value">Not initialized</span>
+            </div>
+            <div class="status-card">
+              <strong>Driver Runtime</strong>
+              <span id="renderer-driver-runtime-value">No runtime</span>
+            </div>
+            <div class="status-card">
+              <strong>Driver Capability</strong>
+              <span id="renderer-driver-capability-value">Pending</span>
+            </div>
+            <div class="status-card">
+              <strong>Host Contract</strong>
+              <span id="renderer-host-contract-value">Not exported</span>
+            </div>
+            <div class="status-card">
+              <strong>Bridge Readiness</strong>
+              <span id="renderer-bridge-readiness-value">Pending</span>
+            </div>
+            <div class="status-card">
+              <strong>Host Readiness</strong>
+              <span id="renderer-host-readiness-value">Pending</span>
+            </div>
+            <div class="status-card">
+              <strong>Heartbeat</strong>
+              <span id="renderer-heartbeat-value">Stopped</span>
+            </div>
+            <div class="status-card">
+              <strong>Recovery Policy</strong>
+              <span id="renderer-recovery-policy-value">Reinit Driver</span>
+            </div>
+            <div class="status-card">
+              <strong>Host Preflight</strong>
+              <span id="renderer-preflight-status-value">Pending</span>
+            </div>
+            <div class="status-card">
+              <strong>Preflight Issues</strong>
+              <span id="renderer-preflight-issues-value">0 blocking</span>
+            </div>
+            <div class="status-card">
+              <strong>Admission</strong>
+              <span id="renderer-admission-status-value">Not evaluated</span>
+            </div>
+            <div class="status-card">
+              <strong>Admission Action</strong>
+              <span id="renderer-admission-action-value">None</span>
+            </div>
+            <div class="status-card">
+              <strong>Action Policy</strong>
+              <span id="renderer-action-policy-value">Not evaluated</span>
+            </div>
+            <div class="status-card">
+              <strong>Driver Profile</strong>
+              <span id="renderer-profile-value">Auto</span>
+            </div>
+            <div class="status-card">
+              <strong>Template Presets</strong>
+              <span id="renderer-template-preset-value">Auto</span>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="renderer-driver-mode">Renderer Driver Mode</label>
+              <select id="renderer-driver-mode">
+                <option value="dry-run" selected>Dry Run</option>
+                <option value="simulate-success">Simulate Success</option>
+                <option value="bridge-stub">Bridge Stub</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="renderer-profile-preset">Driver Profile Preset</label>
+              <select id="renderer-profile-preset">
+                <option value="auto" selected>Auto</option>
+                <option value="strict-browser">Strict Browser</option>
+                <option value="mock-demo">Mock Demo</option>
+                <option value="plugin-bridge-ready">Plugin Bridge Ready</option>
+                <option value="media-runtime-ready">Media Runtime Ready</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="renderer-recovery-policy">Recovery Policy</label>
+              <select id="renderer-recovery-policy">
+                <option value="reinit-driver" selected>Reinit Driver</option>
+                <option value="clear-queue-reinit">Clear Queue + Reinit</option>
+                <option value="replay-history">Replay Recent History</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="renderer-heartbeat-ms">Heartbeat Interval (ms)</label>
+              <input id="renderer-heartbeat-ms" type="number" min="1000" step="200" value="4800" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="renderer-bridge-template-preset">Bridge Template Preset</label>
+              <select id="renderer-bridge-template-preset">
+                <option value="auto" selected>Auto</option>
+                <option value="webcontainer-js-interface">Webcontainer JS Interface</option>
+                <option value="webcontrol-local-service">WebControl Local Service</option>
+                <option value="html5-media-basic">HTML5 Media Basic</option>
+                <option value="canvas-socket-basic">Canvas Socket Basic</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="renderer-driver-template-preset">Driver Template Preset</label>
+              <select id="renderer-driver-template-preset">
+                <option value="auto" selected>Auto</option>
+                <option value="plugin-session-driver">Plugin Session Driver</option>
+                <option value="hls-hlsjs-driver">HLS.js Driver</option>
+                <option value="hls-native-driver">Native HLS Driver</option>
+                <option value="ws-canvas-driver">WS Canvas Driver</option>
+                <option value="ws-webcodecs-driver">WS WebCodecs Driver</option>
+              </select>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-apply-profile-defaults" class="secondary">Apply Profile Defaults</button>
+          </div>
+          <div class="actions">
+            <button id="btn-init-driver">Init Driver</button>
+            <button id="btn-dispose-driver" class="secondary">Dispose Driver</button>
+          </div>
+          <div class="actions">
+            <button id="btn-run-health-check" class="secondary">Run Health Check</button>
+            <button id="btn-toggle-heartbeat" class="secondary">Toggle Heartbeat</button>
+            <button id="btn-trigger-recovery" class="ghost">Trigger Recovery</button>
+          </div>
+          <div class="actions">
+            <button id="btn-run-preflight" class="secondary">Run Host Preflight</button>
+            <button id="btn-export-preflight" class="secondary">Export Preflight</button>
+          </div>
+          <div class="actions">
+            <button id="btn-refresh-diagnostics">Refresh Diagnostics</button>
+            <button id="btn-export-attach-plan" class="secondary">Export Attach Plan</button>
+            <button id="btn-export-host-contract" class="secondary">Export Host Contract</button>
+            <button id="btn-export-bridge-template" class="secondary">Export Bridge Template</button>
+            <button id="btn-export-driver-template" class="secondary">Export Driver Template</button>
+            <button id="btn-export-implementation-package" class="secondary">Export Implementation Package</button>
+            <button id="btn-export-runtime-json" class="secondary">Export Runtime JSON</button>
+            <button id="btn-import-runtime-json" class="ghost">Import Runtime JSON</button>
+          </div>
+          <div class="actions">
+            <button id="btn-preview-selected-command" class="secondary">Preview Selected Command</button>
+            <button id="btn-preview-sweep-commands" class="secondary">Preview Sweep Commands</button>
+            <button id="btn-run-command-queue" class="secondary">Run Pending Queue</button>
+            <button id="btn-replay-command-history" class="secondary">Replay Recent History</button>
+            <button id="btn-clear-command-queue" class="danger">Clear Command Queue</button>
+          </div>
+          <div class="field">
+            <label for="runtime-io-buffer">Runtime JSON Buffer</label>
+            <textarea
+              id="runtime-io-buffer"
+              class="runtime-io-buffer"
+              placeholder="导出的运行时 bundle 会出现在这里。你也可以把 runtime bundle 或 runtimeSession JSON 粘进来后点击 Import Runtime JSON。"
+            ></textarea>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>TV Wall Bridge</h2>
+          <p class="hint">
+            本机 OpenAPI 文档已经明确存在电视墙接口，可直接覆盖“窗口分割 / 放大 / 还原”这类桌面客户端动作。
+          </p>
+          <div class="field-row">
+            <div class="field">
+              <label for="tvwall-dlp-id">DLP ID</label>
+              <select id="tvwall-dlp-id"></select>
+            </div>
+            <div class="field">
+              <label for="tvwall-monitor-pos">Monitor Pos</label>
+              <select id="tvwall-monitor-pos"></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="tvwall-floatwnd-id">Float Window ID</label>
+              <select id="tvwall-floatwnd-id"></select>
+            </div>
+            <div class="field">
+              <label for="tvwall-wnd-uri">Window URI</label>
+              <input id="tvwall-wnd-uri" type="text" placeholder="Window URI" />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btn-tvwall-resources">All Resources</button>
+            <button id="btn-tvwall-scenes" class="ghost">Scenes</button>
+            <button id="btn-tvwall-wnds" class="ghost">Windows</button>
+          </div>
+          <div class="actions">
+            <button id="btn-tvwall-div4" class="secondary">Monitor Divide 4</button>
+            <button id="btn-tvwall-div9" class="secondary">Monitor Divide 9</button>
+            <button id="btn-tvwall-div12" class="secondary">Monitor Divide 12</button>
+          </div>
+          <div class="actions">
+            <button id="btn-tvwall-float-div4" class="secondary">Float Divide 4</button>
+            <button id="btn-tvwall-float-div9" class="secondary">Float Divide 9</button>
+            <button id="btn-tvwall-float-div12" class="secondary">Float Divide 12</button>
+          </div>
+          <div class="actions">
+            <button id="btn-tvwall-zoom-normal" class="ghost">Zoom Normal</button>
+            <button id="btn-tvwall-zoom-full" class="ghost">Zoom Fullscreen</button>
+            <button id="btn-tvwall-zoom-out" class="secondary">Zoom Out</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="main-stack">
+        <section class="panel">
+          <div class="wall-toolbar">
+            <div class="toolbar-group">
+              <strong>Local Layout</strong>
+              <button id="btn-layout-4">4 Grid</button>
+              <button id="btn-layout-9" class="ghost">9 Grid</button>
+              <button id="btn-layout-12" class="ghost">12 Grid</button>
+            </div>
+            <div class="toolbar-group">
+              <strong>Selected Tile</strong>
+              <button id="btn-fullscreen-selected" class="secondary">Fullscreen</button>
+              <button id="btn-exit-fullscreen" class="secondary">Back To Grid</button>
+            </div>
+          </div>
+          <div id="preview-stage" class="preview-stage"></div>
+          <div class="summary-grid">
+            <div class="summary-card">
+              <strong>Bound Cameras</strong>
+              <span id="bound-camera-count">0 / 4</span>
+            </div>
+            <div class="summary-card">
+              <strong>Resolved URLs</strong>
+              <span id="resolved-url-count">0</span>
+            </div>
+            <div class="summary-card">
+              <strong>Fullscreen Tile</strong>
+              <span id="fullscreen-value">None</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Camera Catalog</h2>
+          <p class="hint">
+            先从平台拿监控点，再把点位绑定到本地受控宫格。绑定动作只改页面状态，不再猜桌面客户端当前宫格。
+          </p>
+          <div class="camera-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 42px;">Pick</th>
+                  <th>Name</th>
+                  <th>Camera Index Code</th>
+                  <th>Region / Device</th>
+                  <th style="width: 240px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="camera-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>API Snapshots</h2>
+          <div class="snapshot-wrap">
+            <div class="snapshot">
+              <div>
+                <strong>Last Preview Response</strong>
+                <pre id="last-preview-response">No preview response yet.</pre>
+              </div>
+              <div>
+                <strong>TV Wall Snapshot</strong>
+                <pre id="tvwall-snapshot">No tvwall snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Runtime Session Snapshot</strong>
+                <pre id="runtime-session-snapshot">No runtime session snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Diagnostics Snapshot</strong>
+                <pre id="renderer-diagnostics-snapshot">No renderer diagnostics yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Attach Plan</strong>
+                <pre id="renderer-attach-plan-snapshot">No renderer attach plan yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Command Snapshot</strong>
+                <pre id="renderer-command-snapshot">No renderer command snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Execution Snapshot</strong>
+                <pre id="renderer-execution-snapshot">No renderer execution snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Driver Snapshot</strong>
+                <pre id="renderer-driver-snapshot">No renderer driver snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Host Contract Snapshot</strong>
+                <pre id="renderer-host-contract-snapshot">No renderer host contract snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Bridge Template Snapshot</strong>
+                <pre id="renderer-bridge-template-snapshot">No renderer bridge template snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Driver Template Snapshot</strong>
+                <pre id="renderer-driver-template-snapshot">No renderer driver template snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Health Snapshot</strong>
+                <pre id="renderer-health-snapshot">No renderer health snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Host Preflight Snapshot</strong>
+                <pre id="renderer-host-preflight-snapshot">No renderer host preflight snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Admission Snapshot</strong>
+                <pre id="renderer-admission-snapshot">No renderer admission snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Action Policy Snapshot</strong>
+                <pre id="renderer-action-policy-snapshot">No renderer action policy snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Profile Snapshot</strong>
+                <pre id="renderer-profile-snapshot">No renderer profile snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Template Preset Snapshot</strong>
+                <pre id="renderer-template-preset-snapshot">No renderer template preset snapshot yet.</pre>
+              </div>
+              <div>
+                <strong>Renderer Implementation Package Snapshot</strong>
+                <pre id="renderer-implementation-package-snapshot">No renderer implementation package snapshot yet.</pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel log-panel">
+          <div class="log-toolbar">
+            <h2>Run Log</h2>
+            <div class="actions">
+              <button id="btn-run-full-chain">Run Full Chain</button>
+              <button id="btn-run-replay-sequence" class="ghost">Replay 4-9-12</button>
+              <button id="btn-clear-log" class="secondary">Clear Log</button>
+            </div>
+          </div>
+          <pre id="terminal" class="terminal"></pre>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="./platform_spike_poc.js"></script>
+</body>
+</html>
