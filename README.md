@@ -3,6 +3,15 @@
 面向 `视频融合赋能平台 / 视频监控客户端` 的自动化轮询辅助工具。  
 项目来自真实政企驻场运维场景，目标是把“人工值班反复点选监控画面”的重复流程做成可配置、可恢复、可跨电脑部署的 Windows 自动化工具。
 
+## English Summary
+
+Windows automation assistant for video surveillance client patrol workflows.
+
+- Built for a real government-enterprise onsite operations scenario
+- Automates the patrol loop: select -> zoom -> dwell -> restore -> next tile
+- Supports fullscreen/windowed modes, multiple grid layouts, hotkey takeover, and failure recovery
+- Tech focus: Python, state-machine scheduling, UI automation, runtime recovery, multi-machine deployment
+
 ## 项目定位
 
 这个项目解决的是一个很实际的问题：
