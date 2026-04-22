@@ -1,0 +1,41 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#0B1220"/>
+  <rect x="28" y="28" width="1544" height="844" rx="28" fill="#111A2E" stroke="#2D4E86" stroke-width="2"/>
+  <rect x="28" y="28" width="1544" height="72" rx="28" fill="url(#top)"/>
+  <text x="62" y="74" fill="#F8FBFF" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei">视频平台客户端轮询助手 · 项目界面示意</text>
+  <rect x="52" y="124" width="320" height="700" rx="22" fill="#F8FAFC"/>
+  <text x="84" y="180" fill="#25324A" font-size="44" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei">收藏夹</text>
+  <rect x="84" y="214" width="256" height="52" rx="14" fill="#EEF3F9"/>
+  <text x="112" y="248" fill="#6B778C" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">搜索收藏夹 / 轮询点位</text>
+  <rect x="84" y="306" width="256" height="72" rx="14" fill="#E0ECFF"/>
+  <text x="110" y="350" fill="#185ADB" font-size="28" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei">当前预案组 / 值班点位</text>
+  <rect x="84" y="396" width="256" height="56" rx="12" fill="#F4F7FB"/>
+  <rect x="84" y="466" width="256" height="56" rx="12" fill="#F4F7FB"/>
+  <rect x="84" y="536" width="256" height="56" rx="12" fill="#F4F7FB"/>
+  <rect x="84" y="606" width="256" height="56" rx="12" fill="#F4F7FB"/>
+  <text x="106" y="432" fill="#334155" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">轮询顺序按收藏夹 / 自定义序列执行</text>
+  <text x="106" y="502" fill="#334155" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">支持 4 / 6 / 9 / 12 宫格</text>
+  <text x="106" y="572" fill="#334155" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">支持全屏 / 非全屏自动识别</text>
+  <text x="106" y="642" fill="#334155" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">支持人工暂停、步进、恢复</text>
+  <rect x="404" y="124" width="1140" height="700" rx="22" fill="#0D1424"/>
+  <rect x="438" y="164" width="1068" height="90" rx="18" fill="#FFFFFF"/>
+  <text x="486" y="220" fill="#243248" font-size="34" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei">预览模式  ·  自动轮询中  ·  12 宫格  ·  收藏夹顺序</text>
+  <g>
+    <rect x="438" y="286" width="510" height="232" rx="16" fill="#121B30" stroke="#3277FF" stroke-width="3"/>
+    <rect x="996" y="286" width="510" height="232" rx="16" fill="#121B30" stroke="#243248"/>
+    <rect x="438" y="554" width="510" height="232" rx="16" fill="#121B30" stroke="#243248"/>
+    <rect x="996" y="554" width="510" height="232" rx="16" fill="#121B30" stroke="#243248"/>
+    <text x="598" y="410" fill="#93A4C3" font-size="30" font-family="Arial, PingFang SC, Microsoft YaHei">当前窗口高亮 / 即将执行双击放大</text>
+    <text x="1142" y="410" fill="#667892" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei">下一路等待切换</text>
+    <text x="598" y="678" fill="#667892" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei">异常检测 / 黑屏跳过 / 恢复</text>
+    <text x="1142" y="678" fill="#667892" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei">人工监管 / 值班查看</text>
+  </g>
+  <rect x="438" y="742" width="1068" height="54" rx="14" fill="#12284B"/>
+  <text x="476" y="778" fill="#E5EDFF" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">状态栏：模式=auto  ·  宫格=12  ·  阶段=SELECT_CONFIRM  ·  热键=F2/F9/F10/F11  ·  已启用异常恢复</text>
+  <defs>
+    <linearGradient id="top" x1="28" y1="28" x2="1572" y2="100" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B7FFF"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+</svg>
