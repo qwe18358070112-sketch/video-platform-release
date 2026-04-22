@@ -5,6 +5,10 @@
 面向 `视频融合赋能平台 / 视频监控客户端` 的自动化轮询辅助工具。
 项目来自真实政企驻场运维场景，目标是把“人工值班反复点选监控画面”的重复流程做成可配置、可恢复、可跨电脑部署的 Windows 自动化工具。
 
+## 项目演示预览 / Demo Preview
+
+![视频平台客户端轮询助手项目演示预览](assets/demo-preview.gif)
+
 ## English Summary
 
 Windows automation assistant for video surveillance client patrol workflows.
