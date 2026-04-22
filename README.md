@@ -22,6 +22,10 @@ Windows automation assistant for video surveillance client patrol workflows.
 
 我把这件事做成了一个独立工具，让轮询流程从“人肉点击”变成“可控自动化”。
 
+## 项目亮点卡片 / Bilingual Highlight Cards
+
+![视频平台客户端轮询助手项目亮点卡片](assets/highlight-cards-bilingual.svg)
+
 ## 首页图示
 
 ### 项目界面示意
