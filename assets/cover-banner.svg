@@ -1,0 +1,59 @@
+<svg width="1600" height="640" viewBox="0 0 1600 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="640" fill="#07101D"/>
+  <rect x="0" y="0" width="1600" height="640" fill="url(#bg)"/>
+  <circle cx="1310" cy="120" r="220" fill="url(#glow)" opacity="0.45"/>
+  <circle cx="1420" cy="520" r="180" fill="#1C4ED8" opacity="0.16"/>
+  <circle cx="1180" cy="470" r="120" fill="#38BDF8" opacity="0.12"/>
+
+  <rect x="72" y="72" width="1456" height="496" rx="32" fill="rgba(255,255,255,0.03)" stroke="rgba(127,170,255,0.22)" stroke-width="2"/>
+  <rect x="92" y="92" width="1416" height="456" rx="24" fill="rgba(10,16,30,0.58)"/>
+
+  <text x="126" y="166" fill="#9CC6FF" font-size="22" letter-spacing="3" font-family="Arial, PingFang SC, Microsoft YaHei">REAL-WORLD OPS AUTOMATION / WINDOWS TOOLING</text>
+  <text x="124" y="258" fill="#F8FBFF" font-size="70" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei">视频平台客户端轮询助手</text>
+  <text x="126" y="320" fill="#D9E6FF" font-size="28" font-family="Arial, PingFang SC, Microsoft YaHei">面向政企驻场值班与巡检的自动轮询工具</text>
+  <text x="126" y="362" fill="#89A3C8" font-size="24" font-family="Arial, PingFang SC, Microsoft YaHei">State-machine scheduling · Hotkey override · Failure recovery · Multi-layout support</text>
+
+  <rect x="126" y="406" width="222" height="48" rx="24" fill="#2563EB"/>
+  <rect x="364" y="406" width="252" height="48" rx="24" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.14)"/>
+  <rect x="632" y="406" width="240" height="48" rx="24" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.14)"/>
+  <text x="162" y="438" fill="#FFFFFF" font-size="22" font-weight="700" font-family="Arial, PingFang SC, Microsoft YaHei">真实驻场项目</text>
+  <text x="405" y="438" fill="#DCE9FF" font-size="22" font-family="Arial, PingFang SC, Microsoft YaHei">4 / 6 / 9 / 12 宫格</text>
+  <text x="674" y="438" fill="#DCE9FF" font-size="22" font-family="Arial, PingFang SC, Microsoft YaHei">全屏 / 非全屏</text>
+
+  <text x="126" y="512" fill="#6FA3FF" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei">SELECT</text>
+  <text x="254" y="512" fill="#6FA3FF" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei">ZOOM</text>
+  <text x="372" y="512" fill="#6FA3FF" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei">DWELL</text>
+  <text x="496" y="512" fill="#6FA3FF" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei">RESTORE</text>
+  <text x="652" y="512" fill="#6FA3FF" font-size="20" font-family="Arial, PingFang SC, Microsoft YaHei">NEXT</text>
+  <path d="M186 500H230" stroke="#6FA3FF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M304 500H348" stroke="#6FA3FF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M430 500H472" stroke="#6FA3FF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M584 500H628" stroke="#6FA3FF" stroke-width="3" stroke-linecap="round"/>
+
+  <g>
+    <rect x="1000" y="132" width="408" height="376" rx="28" fill="rgba(13,22,40,0.82)" stroke="rgba(94,146,255,0.35)" stroke-width="2"/>
+    <rect x="1030" y="164" width="348" height="52" rx="16" fill="rgba(255,255,255,0.08)"/>
+    <text x="1060" y="198" fill="#DCE9FF" font-size="22" font-family="Arial, PingFang SC, Microsoft YaHei">轮询状态 · RUNNING · layout=12 · mode=auto</text>
+
+    <rect x="1032" y="244" width="156" height="112" rx="18" fill="#10192C" stroke="#3B82F6" stroke-width="3"/>
+    <rect x="1216" y="244" width="156" height="112" rx="18" fill="#10192C" stroke="rgba(255,255,255,0.12)"/>
+    <rect x="1032" y="382" width="156" height="96" rx="18" fill="#10192C" stroke="rgba(255,255,255,0.12)"/>
+    <rect x="1216" y="382" width="156" height="96" rx="18" fill="#10192C" stroke="rgba(255,255,255,0.12)"/>
+    <text x="1060" y="304" fill="#86A7D9" font-size="18" font-family="Arial, PingFang SC, Microsoft YaHei">当前聚焦</text>
+    <text x="1246" y="304" fill="#61799D" font-size="18" font-family="Arial, PingFang SC, Microsoft YaHei">下一路</text>
+    <text x="1060" y="436" fill="#61799D" font-size="18" font-family="Arial, PingFang SC, Microsoft YaHei">异常检测</text>
+    <text x="1246" y="436" fill="#61799D" font-size="18" font-family="Arial, PingFang SC, Microsoft YaHei">人工监管</text>
+  </g>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="0.52" stop-color="#0C1830"/>
+      <stop offset="1" stop-color="#0A1324"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1310 120) rotate(90) scale(220)">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#60A5FA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
