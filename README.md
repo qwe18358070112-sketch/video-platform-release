@@ -122,37 +122,30 @@ Windows automation assistant for video surveillance client patrol workflows.
 
 ## 快速开始
 
-### 1. 安装依赖
+### Windows：完整运行链路
 
 ```powershell
+copy config.example.yaml config.yaml
 .\install_deps.bat
-```
-
-### 2. 标定窗口区域
-
-```powershell
 python app.py --calibrate windowed
 python app.py --calibrate fullscreen
-```
-
-### 3. 检查标定结果
-
-```powershell
 python app.py --inspect-calibration windowed
 python app.py --inspect-calibration fullscreen
-```
-
-### 4. 自测
-
-```powershell
-python self_test.py
-```
-
-### 5. 启动
-
-```powershell
 python app.py --run --mode auto
 ```
+
+### WSL / Linux：公开仓库逻辑验证
+
+```bash
+./install_deps.sh
+cp config.example.yaml config.yaml
+.venv/bin/python public_smoke_test.py
+```
+
+### 关于 `self_test.py`
+
+`self_test.py` 是内部全量回归脚本，适合完整工作区或内部交付目录。
+公开仓库为了安全和体积控制移除了部分内部文件、运行时样本和交付资产，因此对外展示时建议使用 `public_smoke_test.py` 做公开版仓库验证。
 
 ## 适合面试讲解的点
 
